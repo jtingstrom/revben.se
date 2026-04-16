@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drinkgenerator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0d0d0d;
+      --surface:  #161616;
+      --surface2: #1f1f1f;
+      --border:   rgba(255,255,255,0.08);
+      --border2:  rgba(255,255,255,0.14);
+      --text:     #f0ece4;
+      --muted:    #888;
+      --accent:   #d4a84b;
+      --accent2:  #e8c97a;
+      --tag-bg:   rgba(212,168,75,0.12);
+      --tag-text: #d4a84b;
+      --radius:   10px;
+      --radius-lg:16px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Subtle noise texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    header {
+      width: 100%;
+      max-width: 680px;
+      padding: 3.5rem 1.5rem 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 0.75rem;
+    }
+
+    .logo svg { color: var(--accent); flex-shrink: 0; }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      line-height: 1.1;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .tagline {
+      font-size: 15px;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      font-weight: 300;
+    }
+
+    main {
+      width: 100%;
+      max-width: 680px;
+      padding: 0 1.5rem 4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Input section */
+    .input-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .input-row input {
+      flex: 1;
+      height: 44px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .input-row input::placeholder { color: var(--muted); }
+    .input-row input:focus { border-color: var(--accent); }
+
+    .btn-add {
+      height: 44px;
+      padding: 0 18px;
+      background: var(--accent);
+      color: #0d0d0d;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      white-space: nowrap;
+    }
+
+    .btn-add:hover { background: var(--accent2); }
+    .btn-add:active { transform: scale(0.97); }
+
+    .tags-area {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 1rem;
+      min-height: 36px;
+      align-items: flex-start;
+    }
+
+    .tag {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--tag-bg);
+      border: 1px solid rgba(212,168,75,0.2);
+      color: var(--tag-text);
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 13px;
+      font-weight: 400;
+      animation: tagIn 0.15s ease;
+    }
+
+    @keyframes tagIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    .tag button {
+      background: none;
+      border: none;
+      color: rgba(212,168,75,0.5);
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      padding: 0;
+      transition: color 0.1s;
+    }
+
+    .tag button:hover { color: var(--accent); }
+
+    .hint-text {
+      font-size: 13px;
+      color: var(--muted);
+      align-self: center;
+    }
+
+    /* Options */
+    .options-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .opt {
+      flex: 1;
+      min-width: 140px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem;
+    }
+
+    .opt .section-label { margin-bottom: 0.5rem; }
+
+    .seg {
+      display: flex;
+      background: var(--surface2);
+      border-radius: 6px;
+      padding: 2px;
+      gap: 2px;
+    }
+
+    .seg button {
+      flex: 1;
+      height: 30px;
+      background: none;
+      border: none;
+      border-radius: 5px;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+    }
+
+    .seg button.active {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border2);
+    }
+
+    .count-btns {
+      display: flex;
+      gap: 4px;
+    }
+
+    .count-btns button {
+      flex: 1;
+      height: 30px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      cursor: pointer;
+      transition: border-color 0.12s, color 0.12s;
+    }
+
+    .count-btns button.active {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Generate button */
+    .btn-generate {
+      width: 100%;
+      height: 52px;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 400;
+      font-style: italic;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-generate:hover {
+      border-color: var(--accent);
+      background: rgba(212,168,75,0.05);
+    }
+
+    .btn-generate:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    /* Loading */
+    .loading {
+      text-align: center;
+      padding: 3rem 0;
+    }
+
+    .shaker {
+      display: inline-block;
+      font-size: 2rem;
+      animation: shake 0.5s infinite alternate;
+    }
+
+    @keyframes shake {
+      from { transform: rotate(-15deg); }
+      to   { transform: rotate(15deg); }
+    }
+
+    .loading p {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* Drink cards */
+    .drinks { display: flex; flex-direction: column; gap: 1px; }
+
+    .drink-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      animation: cardIn 0.3s ease;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .drink-card + .drink-card { margin-top: 12px; }
+
+    .drink-top {
+      padding: 1.25rem 1.5rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .drink-row1 {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.4rem;
+    }
+
+    .drink-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .badge {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+
+    .badge-alc {
+      background: rgba(212,168,75,0.12);
+      color: var(--accent);
+      border: 1px solid rgba(212,168,75,0.2);
+    }
+
+    .badge-non {
+      background: rgba(74,185,130,0.1);
+      color: #4ab982;
+      border: 1px solid rgba(74,185,130,0.2);
+    }
+
+    .drink-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .drink-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    @media (max-width: 520px) {
+      .drink-body { grid-template-columns: 1fr; }
+    }
+
+    .drink-section {
+      padding: 1rem 1.5rem;
+    }
+
+    .drink-section + .drink-section {
+      border-left: 1px solid var(--border);
+    }
+
+    @media (max-width: 520px) {
+      .drink-section + .drink-section {
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+    }
+
+    .drink-section .section-label { margin-bottom: 0.5rem; }
+
+    .drink-ingr-list {
+      list-style: none;
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.9;
+    }
+
+    .drink-ingr-list li::before {
+      content: '—';
+      color: var(--accent);
+      margin-right: 6px;
+      font-size: 11px;
+    }
+
+    .drink-recipe-text {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    .error {
+      text-align: center;
+      padding: 2rem;
+      color: #e07070;
+      font-size: 14px;
+    }
+
+    /* Footer */
+    footer {
+      width: 100%;
+      max-width: 680px;
+      padding: 0 1.5rem 2rem;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,0.2);
+      position: relative;
+      z-index: 1;
+    }
+
+    footer a {
+      color: rgba(212,168,75,0.4);
+      text-decoration: none;
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* API key section */
+    .api-notice {
+      background: rgba(212,168,75,0.06);
+      border: 1px solid rgba(212,168,75,0.15);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .api-notice strong { color: var(--text); font-weight: 500; }
+
+    .api-key-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 0.75rem;
+    }
+
+    .api-key-row input {
+      flex: 1;
+      height: 38px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0 12px;
+      font-family: 'DM Sans', monospace;
+      font-size: 13px;
+      color: var(--text);
+      outline: none;
+    }
+
+    .api-key-row input:focus { border-color: var(--accent); }
+
+    .btn-save-key {
+      height: 38px;
+      padding: 0 14px;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .btn-save-key:hover { border-color: var(--accent); color: var(--accent); }
+
+    .key-status {
+      margin-top: 0.5rem;
+      font-size: 12px;
+      color: #4ab982;
+      min-height: 1em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 3h16l-6 9.5V20h2.5v1.5h-9V20H10v-7.5L4 3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+    </svg>
+    <h1>Drink<em>generator</em></h1>
+  </div>
+  <p class="tagline">Skriv in vad du har hemma — vi blandar resten.</p>
+</header>
+
+<main>
+
+  <!-- API key notice -->
+  <div class="api-notice" id="api-section">
+    <strong>Anthropic API-nyckel krävs.</strong> Din nyckel sparas bara lokalt i din webbläsare och skickas aldrig någonstans annat. Skaffa en på <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>.
+    <div class="api-key-row">
+      <input type="password" id="api-key-input" placeholder="sk-ant-…" autocomplete="off" />
+      <button class="btn-save-key" onclick="saveKey()">Spara</button>
+    </div>
+    <div class="key-status" id="key-status"></div>
+  </div>
+
+  <!-- Ingredient input -->
+  <div class="input-card">
+    <div class="section-label">Dina ingredienser</div>
+    <div class="input-row">
+      <input type="text" id="ingr-input" placeholder="T.ex. vodka, lime, tonic, ingefärsöl…" />
+      <button class="btn-add" onclick="addIngredient()">+ Lägg till</button>
+    </div>
+    <div class="tags-area" id="tags">
+      <span class="hint-text" id="hint">Inga ingredienser tillagda än.</span>
+    </div>
+  </div>
+
+  <!-- Options -->
+  <div class="options-row">
+    <div class="opt">
+      <div class="section-label">Typ</div>
+      <div class="seg" id="type-seg">
+        <button class="active" data-val="alla" onclick="selectSeg(this,'type-seg')">Alla</button>
+        <button data-val="alkoholhaltiga" onclick="selectSeg(this,'type-seg')">Alkohol</button>
+        <button data-val="alkoholfria" onclick="selectSeg(this,'type-seg')">Alkoholfria</button>
+      </div>
+    </div>
+    <div class="opt">
+      <div class="section-label">Antal förslag</div>
+      <div class="count-btns" id="count-seg">
+        <button data-val="2" onclick="selectCount(this)">2</button>
+        <button data-val="3" class="active" onclick="selectCount(this)">3</button>
+        <button data-val="5" onclick="selectCount(this)">5</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Generate -->
+  <button class="btn-generate" id="gen-btn" onclick="generateDrinks()">
+    <span>✦</span> Hitta drinkar
+  </button>
+
+  <!-- Result -->
+  <div id="result"></div>
+
+</main>
+
+<footer>
+  Powered by <a href="https://anthropic.com" target="_blank">Anthropic Claude</a> · API-nyckeln lagras enbart i localStorage
+</footer>
+
+<script>
+  const tags = new Set();
+  let apiKey = localStorage.getItem('drink_api_key') || '';
+  let drinkType = 'alla';
+  let drinkCount = 3;
+
+  // Init key field
+  if (apiKey) {
+    document.getElementById('key-status').textContent = 'Nyckel sparad ✓';
+    document.getElementById('api-key-input').value = apiKey;
+  }
+
+  function saveKey() {
+    const val = document.getElementById('api-key-input').value.trim();
+    if (!val) return;
+    apiKey = val;
+    localStorage.setItem('drink_api_key', val);
+    document.getElementById('key-status').textContent = 'Nyckel sparad ✓';
+  }
+
+  function selectSeg(btn, segId) {
+    document.querySelectorAll('#' + segId + ' button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    drinkType = btn.dataset.val;
+  }
+
+  function selectCount(btn) {
+    document.querySelectorAll('#count-seg button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    drinkCount = parseInt(btn.dataset.val);
+  }
+
+  function addIngredient() {
+    const input = document.getElementById('ingr-input');
+    const val = input.value.trim();
+    if (!val) return;
+    val.split(/[,;]+/).forEach(v => {
+      const t = v.trim();
+      if (t) tags.add(t.toLowerCase());
+    });
+    input.value = '';
+    renderTags();
+  }
+
+  document.getElementById('ingr-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') addIngredient();
+  });
+
+  function removeTag(t) {
+    tags.delete(t);
+    renderTags();
+  }
+
+  function renderTags() {
+    const container = document.getElementById('tags');
+    container.innerHTML = '';
+    if (tags.size === 0) {
+      container.innerHTML = '<span class="hint-text">Inga ingredienser tillagda än.</span>';
+      return;
+    }
+    tags.forEach(t => {
+      const tag = document.createElement('span');
+      tag.className = 'tag';
+      const safe = t.replace(/'/g, "\\'");
+      tag.innerHTML = `${t} <button onclick="removeTag('${safe}')" title="Ta bort">×</button>`;
+      container.appendChild(tag);
+    });
+  }
+
+  async function generateDrinks() {
+    if (!apiKey) { alert('Ange din Anthropic API-nyckel först.'); return; }
+    if (tags.size === 0) { alert('Lägg till minst en ingrediens!'); return; }
+
+    const btn = document.getElementById('gen-btn');
+    const result = document.getElementById('result');
+    btn.disabled = true;
+    result.innerHTML = `
+      <div class="loading">
+        <div class="shaker">🍸</div>
+        <p>Blandar dina drinkar…</p>
+      </div>`;
+
+    const ingredientList = [...tags].join(', ');
+    const typeInstruction = drinkType === 'alkoholhaltiga'
+      ? 'Ge ENBART alkoholhaltiga drinkar.'
+      : drinkType === 'alkoholfria'
+      ? 'Ge ENBART alkoholfria drinkar (mocktails).'
+      : 'Blanda gärna alkoholhaltiga och alkoholfria.';
+
+    const prompt = `Du är en erfaren bartender. Användaren har dessa ingredienser hemma: ${ingredientList}.
+
+${typeInstruction}
+
+Föreslå ${drinkCount} drinkar som kan göras med dessa ingredienser. Vanliga basvaror som is, vatten, socker och salt behöver inte finnas i listan.
+
+Svara ENBART med ett JSON-objekt. Inga backticks, inga kommentarer, inget annat. Format:
+{"drinks":[{"name":"Drinkens namn","alcohol":true,"description":"Kort lockande beskrivning, en mening.","ingredients":["2 cl vodka","1 cl limejuice","tonic till toppen"],"recipe":"Steg-för-steg i 2-3 meningar."}]}`;
+
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1500,
+          messages: [{ role: 'user', content: prompt }]
+        })
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error?.message || 'API-fel ' + res.status);
+      }
+
+      const data = await res.json();
+      const text = data.content.map(i => i.text || '').join('');
+      const clean = text.replace(/```json|```/g, '').trim();
+      const parsed = JSON.parse(clean);
+      renderDrinks(parsed.drinks);
+    } catch(e) {
+      result.innerHTML = `<div class="error">Något gick fel: ${e.message}</div>`;
+    }
+
+    btn.disabled = false;
+  }
+
+  function renderDrinks(drinks) {
+    const result = document.getElementById('result');
+    if (!drinks || drinks.length === 0) {
+      result.innerHTML = '<div class="error">Hittade inga drinkar med dessa ingredienser.</div>';
+      return;
+    }
+
+    result.innerHTML = '<div class="drinks">' + drinks.map((d, i) => `
+      <div class="drink-card" style="animation-delay:${i * 0.08}s">
+        <div class="drink-top">
+          <div class="drink-row1">
+            <div class="drink-name">${d.name}</div>
+            <span class="badge ${d.alcohol ? 'badge-alc' : 'badge-non'}">${d.alcohol ? 'Alkohol' : 'Alkoholfri'}</span>
+          </div>
+          <p class="drink-desc">${d.description}</p>
+        </div>
+        <div class="drink-body">
+          <div class="drink-section">
+            <div class="section-label">Ingredienser</div>
+            <ul class="drink-ingr-list">${d.ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
+          </div>
+          <div class="drink-section">
+            <div class="section-label">Gör så här</div>
+            <p class="drink-recipe-text">${d.recipe}</p>
+          </div>
+        </div>
+      </div>
+    `).join('') + '</div>';
+  }
+</script>
+</body>
+</html>
