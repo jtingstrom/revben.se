@@ -558,18 +558,17 @@
     highlighted = -1;
     if (q.length < 1) { closeDropdown(); return; }
 
-    dropdownItems = allIngredients
-      .filter(i => i.toLowerCase().includes(q) && !selected.has(i))
-      .slice(0, 10);
+    dropdownItems = searchList
+      .filter(s => s.label.toLowerCase().includes(q) && !selected.has(s.ingredient))
+      .slice(0, 12);
 
     if (dropdownItems.length === 0) { closeDropdown(); return; }
 
     dropdown.innerHTML = dropdownItems.map((item, idx) => {
-      const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-      const highlighted_text = item.replace(re, '<mark>$1</mark>');
-      return `<div class="dropdown-item" data-idx="${idx}" onmousedown="pickItem('${item.replace(/'/g,"\\'")}')">
-        ${highlighted_text}
-      </div>`;
+      const re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+      const hl = item.label.replace(re, '<mark>$1</mark>');
+      const hint = item.isBrand ? '<span style="font-size:12px;color:var(--muted);margin-left:6px;">→ ' + item.ingredient + '</span>' : '';
+      return '<div class="dropdown-item" onmousedown="pickItem(' + idx + ')">' + hl + hint + '</div>';
     }).join('');
 
     dropdown.classList.add('open');
