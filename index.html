@@ -496,8 +496,36 @@
 </footer>
 
 <script>
+  // Brand → ingredient mapping
+  const brandMap = {
+    'Absolut': 'Vodka', 'Absolut Vodka': 'Vodka',
+    'Smirnoff': 'Vodka', 'Grey Goose': 'Vodka', 'Belvedere': 'Vodka', 'Ketel One': 'Vodka', 'Stolichnaya': 'Vodka', 'Stoli': 'Vodka',
+    'Bombay': 'Gin', 'Bombay Sapphire': 'Gin', 'Hendricks': 'Gin', "Hendrick's": 'Gin', 'Tanqueray': 'Gin', 'Beefeater': 'Gin', 'Gordon\'s': 'Gin', 'Gordons': 'Gin', 'Monkey 47': 'Gin',
+    'Bacardi': 'White Rum', 'Captain Morgan': 'Dark Rum', 'Havana Club': 'Cuban Rum', 'Malibu': 'Coconut Rum', 'Mount Gay': 'Dark Rum',
+    'Jack Daniel\'s': 'Whiskey', 'Jack Daniels': 'Whiskey', 'Jim Beam': 'Bourbon', 'Maker\'s Mark': 'Bourbon', 'Makers Mark': 'Bourbon', 'Wild Turkey': 'Bourbon', 'Bulleit': 'Bourbon',
+    'Johnnie Walker': 'Scotch', 'Glenfiddich': 'Scotch', 'Macallan': 'Scotch', 'Laphroaig': 'Scotch', 'Chivas': 'Scotch', 'Chivas Regal': 'Scotch',
+    'Jameson': 'Irish Whiskey', 'Bushmills': 'Irish Whiskey',
+    'Jose Cuervo': 'Tequila', 'Patron': 'Tequila', 'Don Julio': 'Tequila', 'Herradura': 'Tequila', 'Espolon': 'Tequila',
+    'Hennessy': 'Cognac', 'Remy Martin': 'Cognac', 'Rémy Martin': 'Cognac', 'Courvoisier': 'Cognac',
+    'Baileys': 'Baileys irish cream', "Bailey's": 'Baileys irish cream',
+    'Kahlua': 'Kahlua', 'Kahluá': 'Kahlua',
+    'Aperol': 'Aperol', 'Campari': 'Campari', 'Cointreau': 'Triple sec', 'Grand Marnier': 'Grand Marnier',
+    'Jagermeister': 'Jagermeister', 'Jägermeister': 'Jagermeister',
+    'Amaretto': 'Amaretto', 'Disaronno': 'Amaretto',
+    'Midori': 'Midori melon liqueur', 'Blue Curacao': 'Blue Curacao', 'Drambuie': 'Drambuie',
+    'Prosecco': 'Prosecco', 'Champagne': 'Champagne',
+    'Angostura': 'Angostura bitters', 'Peychaud\'s': 'Peychaud Bitters',
+    'St-Germain': 'Elderflower liqueur', 'Frangelico': 'Frangelico', 'Sambuca': 'Sambuca',
+    'Pimm\'s': 'Pimms', 'Pimms': 'Pimms', 'Tia Maria': 'Tia maria',
+    'Absolut Citron': 'Lemon vodka', 'Absolut Peppar': 'Pepper vodka'
+  };
+
+  // Build combined search list: ingredients + brands
   let allIngredients = [];
-  let selected = new Set();
+  let brandList = [];
+  let searchList = []; // {label, ingredient, isBrand}
+  let selected = new Set(); // stores ingredient names
+  let selectedLabels = new Map(); // ingredient -> display label
   let drinkType = 'alla';
   let matchMode = 'any';
   let highlighted = -1;
@@ -509,6 +537,11 @@
       const res = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
       const data = await res.json();
       allIngredients = data.drinks.map(d => d.strIngredient1);
+      brandList = Object.keys(brandMap);
+      searchList = [
+        ...allIngredients.map(i => ({ label: i, ingredient: i, isBrand: false })),
+        ...brandList.map(b => ({ label: b, ingredient: brandMap[b], isBrand: true }))
+      ];
     } catch(e) {
       console.error('Kunde inte ladda ingredienser', e);
     }
@@ -555,7 +588,7 @@
     } else if (e.key === 'Enter') {
       e.preventDefault();
       if (highlighted >= 0 && dropdownItems[highlighted]) {
-        pickItem(dropdownItems[highlighted]);
+        pickItem(highlighted);
       }
     } else if (e.key === 'Escape') {
       closeDropdown();
@@ -577,8 +610,11 @@
     highlighted = -1;
   }
 
-  function pickItem(name) {
-    selected.add(name);
+  function pickItem(idx) {
+    const item = dropdownItems[idx];
+    if (!item) return;
+    selected.add(item.ingredient);
+    selectedLabels.set(item.ingredient, item.isBrand ? item.label + ' (' + item.ingredient + ')' : item.label);
     input.value = '';
     closeDropdown();
     renderTags();
@@ -587,6 +623,7 @@
 
   function removeTag(name) {
     selected.delete(name);
+    selectedLabels.delete(name);
     renderTags();
   }
 
