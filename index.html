@@ -545,19 +545,16 @@
       isBrand: false,
       isSv: true
     }));
-    searchList = [
-      ...allIngredients.map(i => ({ label: i, ingredient: i, isBrand: false })),
+    // Brands and Swedish entries always included; deduplicate plain ingredients only
+    const brandAndSv = [
       ...brandList.map(b => ({ label: b, ingredient: brandMap[b], isBrand: true })),
       ...svEntries
     ];
-    // Deduplicate by label (case-insensitive)
-    const seen = new Set();
-    searchList = searchList.filter(s => {
-      const k = s.label.toLowerCase();
-      if (seen.has(k)) return false;
-      seen.add(k);
-      return true;
-    });
+    const brandAndSvLabels = new Set(brandAndSv.map(s => s.label.toLowerCase()));
+    const ingredientEntries = allIngredients
+      .filter(i => !brandAndSvLabels.has(i.toLowerCase()))
+      .map(i => ({ label: i, ingredient: i, isBrand: false }));
+    searchList = [...ingredientEntries, ...brandAndSv];
   }
 
   loadIngredients();
