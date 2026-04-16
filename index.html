@@ -36,7 +36,6 @@
       align-items: center;
     }
 
-    /* Subtle noise texture overlay */
     body::before {
       content: '';
       position: fixed;
@@ -54,13 +53,7 @@
       z-index: 1;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 0.75rem;
-    }
-
+    .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
     .logo svg { color: var(--accent); flex-shrink: 0; }
 
     h1 {
@@ -72,17 +65,8 @@
       line-height: 1.1;
     }
 
-    h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .tagline {
-      font-size: 15px;
-      color: var(--muted);
-      margin-top: 0.5rem;
-      font-weight: 300;
-    }
+    h1 em { font-style: italic; color: var(--accent); }
+    .tagline { font-size: 15px; color: var(--muted); margin-top: 0.5rem; font-weight: 300; }
 
     main {
       width: 100%;
@@ -92,7 +76,6 @@
       z-index: 1;
     }
 
-    /* Input section */
     .input-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -110,13 +93,10 @@
       margin-bottom: 0.75rem;
     }
 
-    .input-row {
-      display: flex;
-      gap: 8px;
-    }
+    .autocomplete-wrap { position: relative; }
 
-    .input-row input {
-      flex: 1;
+    .autocomplete-wrap input {
+      width: 100%;
       height: 44px;
       background: var(--surface2);
       border: 1px solid var(--border);
@@ -130,26 +110,42 @@
       transition: border-color 0.15s;
     }
 
-    .input-row input::placeholder { color: var(--muted); }
-    .input-row input:focus { border-color: var(--accent); }
+    .autocomplete-wrap input::placeholder { color: var(--muted); }
+    .autocomplete-wrap input:focus { border-color: var(--accent); }
 
-    .btn-add {
-      height: 44px;
-      padding: 0 18px;
-      background: var(--accent);
-      color: #0d0d0d;
-      border: none;
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0; right: 0;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
       border-radius: var(--radius);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.15s, transform 0.1s;
-      white-space: nowrap;
+      max-height: 220px;
+      overflow-y: auto;
+      z-index: 100;
+      display: none;
     }
 
-    .btn-add:hover { background: var(--accent2); }
-    .btn-add:active { transform: scale(0.97); }
+    .dropdown.open { display: block; }
+
+    .dropdown-item {
+      padding: 10px 14px;
+      font-size: 14px;
+      color: var(--text);
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+
+    .dropdown-item:hover, .dropdown-item.highlighted {
+      background: rgba(212,168,75,0.1);
+      color: var(--accent);
+    }
+
+    .dropdown-item mark {
+      background: none;
+      color: var(--accent);
+      font-weight: 500;
+    }
 
     .tags-area {
       display: flex;
@@ -191,20 +187,9 @@
     }
 
     .tag button:hover { color: var(--accent); }
+    .hint-text { font-size: 13px; color: var(--muted); align-self: center; }
 
-    .hint-text {
-      font-size: 13px;
-      color: var(--muted);
-      align-self: center;
-    }
-
-    /* Options */
-    .options-row {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-    }
+    .options-row { display: flex; gap: 12px; margin-bottom: 1rem; flex-wrap: wrap; }
 
     .opt {
       flex: 1;
@@ -244,30 +229,6 @@
       border: 1px solid var(--border2);
     }
 
-    .count-btns {
-      display: flex;
-      gap: 4px;
-    }
-
-    .count-btns button {
-      flex: 1;
-      height: 30px;
-      background: none;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      color: var(--muted);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      cursor: pointer;
-      transition: border-color 0.12s, color 0.12s;
-    }
-
-    .count-btns button.active {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* Generate button */
     .btn-generate {
       width: 100%;
       height: 52px;
@@ -288,48 +249,22 @@
       gap: 10px;
     }
 
-    .btn-generate:hover {
-      border-color: var(--accent);
-      background: rgba(212,168,75,0.05);
-    }
+    .btn-generate:hover { border-color: var(--accent); background: rgba(212,168,75,0.05); }
+    .btn-generate:disabled { opacity: 0.35; cursor: not-allowed; }
 
-    .btn-generate:disabled {
-      opacity: 0.35;
-      cursor: not-allowed;
-    }
+    .loading { text-align: center; padding: 3rem 0; }
+    .shaker { display: inline-block; font-size: 2rem; animation: shake 0.5s infinite alternate; }
+    @keyframes shake { from { transform: rotate(-15deg); } to { transform: rotate(15deg); } }
+    .loading p { margin-top: 1rem; color: var(--muted); font-size: 14px; }
 
-    /* Loading */
-    .loading {
-      text-align: center;
-      padding: 3rem 0;
-    }
-
-    .shaker {
-      display: inline-block;
-      font-size: 2rem;
-      animation: shake 0.5s infinite alternate;
-    }
-
-    @keyframes shake {
-      from { transform: rotate(-15deg); }
-      to   { transform: rotate(15deg); }
-    }
-
-    .loading p {
-      margin-top: 1rem;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    /* Drink cards */
-    .drinks { display: flex; flex-direction: column; gap: 1px; }
+    .drinks { display: flex; flex-direction: column; gap: 12px; }
 
     .drink-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       overflow: hidden;
-      animation: cardIn 0.3s ease;
+      animation: cardIn 0.3s ease both;
     }
 
     @keyframes cardIn {
@@ -337,26 +272,53 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .drink-card + .drink-card { margin-top: 12px; }
-
     .drink-top {
       padding: 1.25rem 1.5rem 1rem;
       border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
     }
+
+    .drink-thumb {
+      width: 64px;
+      height: 64px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--surface2);
+    }
+
+    .drink-thumb-placeholder {
+      width: 64px;
+      height: 64px;
+      border-radius: 8px;
+      background: var(--surface2);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .drink-meta { flex: 1; min-width: 0; }
 
     .drink-row1 {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.3rem;
+      gap: 8px;
     }
 
     .drink-name {
       font-family: 'Playfair Display', serif;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 400;
       color: var(--text);
     }
+
+    .badges { display: flex; gap: 5px; flex-wrap: wrap; flex-shrink: 0; }
 
     .badge {
       font-size: 10px;
@@ -367,79 +329,53 @@
       border-radius: 999px;
     }
 
-    .badge-alc {
-      background: rgba(212,168,75,0.12);
-      color: var(--accent);
-      border: 1px solid rgba(212,168,75,0.2);
-    }
+    .badge-alc { background: rgba(212,168,75,0.12); color: var(--accent); border: 1px solid rgba(212,168,75,0.2); }
+    .badge-non { background: rgba(74,185,130,0.1); color: #4ab982; border: 1px solid rgba(74,185,130,0.2); }
+    .badge-cat { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid var(--border); }
 
-    .badge-non {
-      background: rgba(74,185,130,0.1);
-      color: #4ab982;
-      border: 1px solid rgba(74,185,130,0.2);
-    }
+    .drink-glass { font-size: 12px; color: var(--muted); margin-bottom: 0.3rem; }
 
-    .drink-desc {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.6;
-    }
+    .drink-body { display: grid; grid-template-columns: 1fr 1fr; }
 
-    .drink-body {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-    }
+    @media (max-width: 520px) { .drink-body { grid-template-columns: 1fr; } }
+
+    .drink-section { padding: 1rem 1.5rem; }
+    .drink-section + .drink-section { border-left: 1px solid var(--border); }
 
     @media (max-width: 520px) {
-      .drink-body { grid-template-columns: 1fr; }
-    }
-
-    .drink-section {
-      padding: 1rem 1.5rem;
-    }
-
-    .drink-section + .drink-section {
-      border-left: 1px solid var(--border);
-    }
-
-    @media (max-width: 520px) {
-      .drink-section + .drink-section {
-        border-left: none;
-        border-top: 1px solid var(--border);
-      }
+      .drink-section + .drink-section { border-left: none; border-top: 1px solid var(--border); }
     }
 
     .drink-section .section-label { margin-bottom: 0.5rem; }
 
-    .drink-ingr-list {
-      list-style: none;
-      font-size: 13px;
-      color: var(--text);
-      line-height: 1.9;
+    .drink-ingr-list { list-style: none; font-size: 13px; color: var(--text); line-height: 1.9; }
+    .drink-ingr-list li::before { content: '—'; color: var(--accent); margin-right: 6px; font-size: 11px; }
+    .drink-ingr-list li.missing { color: var(--muted); }
+    .drink-ingr-list li.missing::before { color: #555; }
+
+    .drink-recipe-text { font-size: 13px; color: var(--text); line-height: 1.8; }
+
+    .match-info {
+      padding: 0.6rem 1.5rem;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      background: rgba(0,0,0,0.2);
     }
 
-    .drink-ingr-list li::before {
-      content: '—';
-      color: var(--accent);
-      margin-right: 6px;
-      font-size: 11px;
-    }
+    .match-info span { color: var(--accent); }
 
-    .drink-recipe-text {
-      font-size: 13px;
-      color: var(--text);
-      line-height: 1.8;
-    }
-
-    .error {
+    .no-results {
       text-align: center;
-      padding: 2rem;
-      color: #e07070;
+      padding: 3rem 0;
+      color: var(--muted);
       font-size: 14px;
     }
 
-    /* Footer */
+    .no-results strong { display: block; font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem; font-weight: 400; }
+
+    .error { text-align: center; padding: 2rem; color: #e07070; font-size: 14px; }
+
     footer {
       width: 100%;
       max-width: 680px;
@@ -451,74 +387,19 @@
       z-index: 1;
     }
 
-    footer a {
-      color: rgba(212,168,75,0.4);
-      text-decoration: none;
-    }
-
+    footer a { color: rgba(212,168,75,0.4); text-decoration: none; }
     footer a:hover { color: var(--accent); }
 
-    /* API key section */
-    .api-notice {
-      background: rgba(212,168,75,0.06);
-      border: 1px solid rgba(212,168,75,0.15);
-      border-radius: var(--radius);
-      padding: 1rem 1.25rem;
-      margin-bottom: 1.5rem;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .api-notice strong { color: var(--text); font-weight: 500; }
-
-    .api-key-row {
-      display: flex;
-      gap: 8px;
-      margin-top: 0.75rem;
-    }
-
-    .api-key-row input {
-      flex: 1;
-      height: 38px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 0 12px;
-      font-family: 'DM Sans', monospace;
-      font-size: 13px;
-      color: var(--text);
-      outline: none;
-    }
-
-    .api-key-row input:focus { border-color: var(--accent); }
-
-    .btn-save-key {
-      height: 38px;
-      padding: 0 14px;
-      background: var(--surface2);
-      border: 1px solid var(--border2);
-      border-radius: var(--radius);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      cursor: pointer;
-    }
-
-    .btn-save-key:hover { border-color: var(--accent); color: var(--accent); }
-
-    .key-status {
-      margin-top: 0.5rem;
-      font-size: 12px;
-      color: #4ab982;
-      min-height: 1em;
-    }
+    .scrollbar-thin::-webkit-scrollbar { width: 4px; }
+    .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+    .scrollbar-thin::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
   </style>
 </head>
 <body>
 
 <header>
   <div class="logo">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
       <path d="M4 3h16l-6 9.5V20h2.5v1.5h-9V20H10v-7.5L4 3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
     </svg>
     <h1>Drink<em>generator</em></h1>
@@ -528,123 +409,149 @@
 
 <main>
 
-  <!-- API key notice -->
-  <div class="api-notice" id="api-section">
-    <strong>Anthropic API-nyckel krävs.</strong> Din nyckel sparas bara lokalt i din webbläsare och skickas aldrig någonstans annat. Skaffa en på <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>.
-    <div class="api-key-row">
-      <input type="password" id="api-key-input" placeholder="sk-ant-…" autocomplete="off" />
-      <button class="btn-save-key" onclick="saveKey()">Spara</button>
-    </div>
-    <div class="key-status" id="key-status"></div>
-  </div>
-
-  <!-- Ingredient input -->
   <div class="input-card">
     <div class="section-label">Dina ingredienser</div>
-    <div class="input-row">
-      <input type="text" id="ingr-input" placeholder="T.ex. vodka, lime, tonic, ingefärsöl…" />
-      <button class="btn-add" onclick="addIngredient()">+ Lägg till</button>
+    <div class="autocomplete-wrap">
+      <input type="text" id="ingr-input" placeholder="Börja skriva en ingrediens…" autocomplete="off" />
+      <div class="dropdown scrollbar-thin" id="dropdown"></div>
     </div>
     <div class="tags-area" id="tags">
-      <span class="hint-text" id="hint">Inga ingredienser tillagda än.</span>
+      <span class="hint-text">Inga ingredienser valda än.</span>
     </div>
   </div>
 
-  <!-- Options -->
   <div class="options-row">
     <div class="opt">
-      <div class="section-label">Typ</div>
+      <div class="section-label">Visa</div>
       <div class="seg" id="type-seg">
         <button class="active" data-val="alla" onclick="selectSeg(this,'type-seg')">Alla</button>
-        <button data-val="alkoholhaltiga" onclick="selectSeg(this,'type-seg')">Alkohol</button>
-        <button data-val="alkoholfria" onclick="selectSeg(this,'type-seg')">Alkoholfria</button>
+        <button data-val="Alcoholic" onclick="selectSeg(this,'type-seg')">Alkohol</button>
+        <button data-val="Non alcoholic" onclick="selectSeg(this,'type-seg')">Alkoholfria</button>
       </div>
     </div>
     <div class="opt">
-      <div class="section-label">Antal förslag</div>
-      <div class="count-btns" id="count-seg">
-        <button data-val="2" onclick="selectCount(this)">2</button>
-        <button data-val="3" class="active" onclick="selectCount(this)">3</button>
-        <button data-val="5" onclick="selectCount(this)">5</button>
+      <div class="section-label">Matchning</div>
+      <div class="seg" id="match-seg">
+        <button class="active" data-val="any" onclick="selectSeg(this,'match-seg')">Någon</button>
+        <button data-val="all" onclick="selectSeg(this,'match-seg')">Alla</button>
       </div>
     </div>
   </div>
 
-  <!-- Generate -->
-  <button class="btn-generate" id="gen-btn" onclick="generateDrinks()">
+  <button class="btn-generate" id="gen-btn" onclick="search()">
     <span>✦</span> Hitta drinkar
   </button>
 
-  <!-- Result -->
   <div id="result"></div>
-
 </main>
 
 <footer>
-  Powered by <a href="https://anthropic.com" target="_blank">Anthropic Claude</a> · API-nyckeln lagras enbart i localStorage
+  Recept från <a href="https://www.thecocktaildb.com" target="_blank">TheCocktailDB</a> · Ingen inloggning krävs
 </footer>
 
 <script>
-  const tags = new Set();
-  let apiKey = localStorage.getItem('drink_api_key') || '';
+  let allIngredients = [];
+  let selected = new Set();
   let drinkType = 'alla';
-  let drinkCount = 3;
+  let matchMode = 'any';
+  let highlighted = -1;
+  let dropdownItems = [];
 
-  // Init key field
-  if (apiKey) {
-    document.getElementById('key-status').textContent = 'Nyckel sparad ✓';
-    document.getElementById('api-key-input').value = apiKey;
+  // Load ingredient list on start
+  async function loadIngredients() {
+    try {
+      const res = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
+      const data = await res.json();
+      allIngredients = data.drinks.map(d => d.strIngredient1);
+    } catch(e) {
+      console.error('Kunde inte ladda ingredienser', e);
+    }
   }
 
-  function saveKey() {
-    const val = document.getElementById('api-key-input').value.trim();
-    if (!val) return;
-    apiKey = val;
-    localStorage.setItem('drink_api_key', val);
-    document.getElementById('key-status').textContent = 'Nyckel sparad ✓';
-  }
+  loadIngredients();
 
-  function selectSeg(btn, segId) {
-    document.querySelectorAll('#' + segId + ' button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    drinkType = btn.dataset.val;
-  }
+  // Autocomplete
+  const input = document.getElementById('ingr-input');
+  const dropdown = document.getElementById('dropdown');
 
-  function selectCount(btn) {
-    document.querySelectorAll('#count-seg button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    drinkCount = parseInt(btn.dataset.val);
-  }
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    highlighted = -1;
+    if (q.length < 1) { closeDropdown(); return; }
 
-  function addIngredient() {
-    const input = document.getElementById('ingr-input');
-    const val = input.value.trim();
-    if (!val) return;
-    val.split(/[,;]+/).forEach(v => {
-      const t = v.trim();
-      if (t) tags.add(t.toLowerCase());
-    });
-    input.value = '';
-    renderTags();
-  }
+    dropdownItems = allIngredients
+      .filter(i => i.toLowerCase().includes(q) && !selected.has(i))
+      .slice(0, 10);
 
-  document.getElementById('ingr-input').addEventListener('keydown', e => {
-    if (e.key === 'Enter') addIngredient();
+    if (dropdownItems.length === 0) { closeDropdown(); return; }
+
+    dropdown.innerHTML = dropdownItems.map((item, idx) => {
+      const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+      const highlighted_text = item.replace(re, '<mark>$1</mark>');
+      return `<div class="dropdown-item" data-idx="${idx}" onmousedown="pickItem('${item.replace(/'/g,"\\'")}')">
+        ${highlighted_text}
+      </div>`;
+    }).join('');
+
+    dropdown.classList.add('open');
   });
 
-  function removeTag(t) {
-    tags.delete(t);
+  input.addEventListener('keydown', e => {
+    const items = dropdown.querySelectorAll('.dropdown-item');
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      highlighted = Math.min(highlighted + 1, items.length - 1);
+      updateHighlight(items);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      highlighted = Math.max(highlighted - 1, -1);
+      updateHighlight(items);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (highlighted >= 0 && dropdownItems[highlighted]) {
+        pickItem(dropdownItems[highlighted]);
+      }
+    } else if (e.key === 'Escape') {
+      closeDropdown();
+    }
+  });
+
+  function updateHighlight(items) {
+    items.forEach((el, i) => el.classList.toggle('highlighted', i === highlighted));
+  }
+
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.autocomplete-wrap')) closeDropdown();
+  });
+
+  function closeDropdown() {
+    dropdown.classList.remove('open');
+    dropdown.innerHTML = '';
+    dropdownItems = [];
+    highlighted = -1;
+  }
+
+  function pickItem(name) {
+    selected.add(name);
+    input.value = '';
+    closeDropdown();
+    renderTags();
+    input.focus();
+  }
+
+  function removeTag(name) {
+    selected.delete(name);
     renderTags();
   }
 
   function renderTags() {
     const container = document.getElementById('tags');
     container.innerHTML = '';
-    if (tags.size === 0) {
-      container.innerHTML = '<span class="hint-text">Inga ingredienser tillagda än.</span>';
+    if (selected.size === 0) {
+      container.innerHTML = '<span class="hint-text">Inga ingredienser valda än.</span>';
       return;
     }
-    tags.forEach(t => {
+    selected.forEach(t => {
       const tag = document.createElement('span');
       tag.className = 'tag';
       const safe = t.replace(/'/g, "\\'");
@@ -653,96 +560,146 @@
     });
   }
 
-  async function generateDrinks() {
-    if (!apiKey) { alert('Ange din Anthropic API-nyckel först.'); return; }
-    if (tags.size === 0) { alert('Lägg till minst en ingrediens!'); return; }
+  function selectSeg(btn, segId) {
+    document.querySelectorAll('#' + segId + ' button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if (segId === 'type-seg') drinkType = btn.dataset.val;
+    if (segId === 'match-seg') matchMode = btn.dataset.val;
+  }
+
+  async function search() {
+    if (selected.size === 0) { alert('Välj minst en ingrediens!'); return; }
 
     const btn = document.getElementById('gen-btn');
     const result = document.getElementById('result');
     btn.disabled = true;
-    result.innerHTML = `
-      <div class="loading">
-        <div class="shaker">🍸</div>
-        <p>Blandar dina drinkar…</p>
-      </div>`;
-
-    const ingredientList = [...tags].join(', ');
-    const typeInstruction = drinkType === 'alkoholhaltiga'
-      ? 'Ge ENBART alkoholhaltiga drinkar.'
-      : drinkType === 'alkoholfria'
-      ? 'Ge ENBART alkoholfria drinkar (mocktails).'
-      : 'Blanda gärna alkoholhaltiga och alkoholfria.';
-
-    const prompt = `Du är en erfaren bartender. Användaren har dessa ingredienser hemma: ${ingredientList}.
-
-${typeInstruction}
-
-Föreslå ${drinkCount} drinkar som kan göras med dessa ingredienser. Vanliga basvaror som is, vatten, socker och salt behöver inte finnas i listan.
-
-Svara ENBART med ett JSON-objekt. Inga backticks, inga kommentarer, inget annat. Format:
-{"drinks":[{"name":"Drinkens namn","alcohol":true,"description":"Kort lockande beskrivning, en mening.","ingredients":["2 cl vodka","1 cl limejuice","tonic till toppen"],"recipe":"Steg-för-steg i 2-3 meningar."}]}`;
+    result.innerHTML = `<div class="loading"><div class="shaker">🍸</div><p>Letar i receptbasen…</p></div>`;
 
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true'
-        },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1500,
-          messages: [{ role: 'user', content: prompt }]
-        })
+      // Fetch drinks for each ingredient
+      const ingredientList = [...selected];
+      const promises = ingredientList.map(ing =>
+        fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(ing)}`)
+          .then(r => r.json())
+          .then(d => ({ ing, drinks: d.drinks || [] }))
+      );
+
+      const results = await Promise.all(promises);
+
+      // Count matches per drink
+      const drinkMap = {};
+      results.forEach(({ ing, drinks }) => {
+        drinks.forEach(d => {
+          if (!drinkMap[d.idDrink]) {
+            drinkMap[d.idDrink] = { id: d.idDrink, name: d.strDrink, thumb: d.strDrinkThumb, matched: new Set() };
+          }
+          drinkMap[d.idDrink].matched.add(ing);
+        });
       });
 
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        throw new Error(err.error?.message || 'API-fel ' + res.status);
+      // Filter by match mode
+      let matches = Object.values(drinkMap).filter(d =>
+        matchMode === 'all' ? d.matched.size === ingredientList.length : d.matched.size >= 1
+      );
+
+      // Sort by number of matched ingredients descending
+      matches.sort((a, b) => b.matched.size - a.matched.size);
+
+      // Limit to top 12
+      matches = matches.slice(0, 12);
+
+      if (matches.length === 0) {
+        result.innerHTML = `<div class="no-results"><strong>Inga drinkar hittades</strong>Prova färre ingredienser eller byt till "Någon" som matchning.</div>`;
+        btn.disabled = false;
+        return;
       }
 
-      const data = await res.json();
-      const text = data.content.map(i => i.text || '').join('');
-      const clean = text.replace(/```json|```/g, '').trim();
-      const parsed = JSON.parse(clean);
-      renderDrinks(parsed.drinks);
+      // Fetch full details for each drink
+      const detailPromises = matches.map(m =>
+        fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${m.id}`)
+          .then(r => r.json())
+          .then(d => d.drinks ? d.drinks[0] : null)
+      );
+
+      const details = (await Promise.all(detailPromises)).filter(Boolean);
+
+      // Filter by alcohol type
+      let filtered = details;
+      if (drinkType !== 'alla') {
+        filtered = details.filter(d => d.strAlcoholic === drinkType);
+      }
+
+      if (filtered.length === 0) {
+        result.innerHTML = `<div class="no-results"><strong>Inga matchningar</strong>Prova att ändra filtret till "Alla".</div>`;
+        btn.disabled = false;
+        return;
+      }
+
+      renderDrinks(filtered, ingredientList);
     } catch(e) {
-      result.innerHTML = `<div class="error">Något gick fel: ${e.message}</div>`;
+      result.innerHTML = `<div class="error">Något gick fel, försök igen.</div>`;
     }
 
     btn.disabled = false;
   }
 
-  function renderDrinks(drinks) {
+  function renderDrinks(drinks, myIngredients) {
     const result = document.getElementById('result');
-    if (!drinks || drinks.length === 0) {
-      result.innerHTML = '<div class="error">Hittade inga drinkar med dessa ingredienser.</div>';
-      return;
-    }
+    const myLower = myIngredients.map(i => i.toLowerCase());
 
-    result.innerHTML = '<div class="drinks">' + drinks.map((d, i) => `
-      <div class="drink-card" style="animation-delay:${i * 0.08}s">
+    result.innerHTML = '<div class="drinks">' + drinks.map((d, idx) => {
+      // Build ingredient list
+      const ingrs = [];
+      for (let i = 1; i <= 15; i++) {
+        const ing = d[`strIngredient${i}`];
+        const msr = d[`strMeasure${i}`];
+        if (!ing) break;
+        const have = myLower.some(m => ing.toLowerCase().includes(m) || m.includes(ing.toLowerCase()));
+        ingrs.push({ ing, msr, have });
+      }
+
+      const haveCount = ingrs.filter(i => i.have).length;
+      const totalCount = ingrs.length;
+
+      const isAlc = d.strAlcoholic === 'Alcoholic';
+
+      return `
+      <div class="drink-card" style="animation-delay:${idx * 0.06}s">
         <div class="drink-top">
-          <div class="drink-row1">
-            <div class="drink-name">${d.name}</div>
-            <span class="badge ${d.alcohol ? 'badge-alc' : 'badge-non'}">${d.alcohol ? 'Alkohol' : 'Alkoholfri'}</span>
+          ${d.strDrinkThumb
+            ? `<img class="drink-thumb" src="${d.strDrinkThumb}/preview" alt="${d.strDrink}" loading="lazy" />`
+            : `<div class="drink-thumb-placeholder">🍹</div>`}
+          <div class="drink-meta">
+            <div class="drink-row1">
+              <div class="drink-name">${d.strDrink}</div>
+              <div class="badges">
+                <span class="badge ${isAlc ? 'badge-alc' : 'badge-non'}">${isAlc ? 'Alkohol' : 'Alkoholfri'}</span>
+                ${d.strCategory ? `<span class="badge badge-cat">${d.strCategory}</span>` : ''}
+              </div>
+            </div>
+            ${d.strGlass ? `<div class="drink-glass">Glas: ${d.strGlass}</div>` : ''}
           </div>
-          <p class="drink-desc">${d.description}</p>
         </div>
         <div class="drink-body">
           <div class="drink-section">
             <div class="section-label">Ingredienser</div>
-            <ul class="drink-ingr-list">${d.ingredients.map(i => `<li>${i}</li>`).join('')}</ul>
+            <ul class="drink-ingr-list">
+              ${ingrs.map(i => `
+                <li class="${i.have ? '' : 'missing'}">
+                  ${i.msr ? i.msr.trim() + ' ' : ''}${i.ing}${!i.have ? ' ✗' : ''}
+                </li>`).join('')}
+            </ul>
           </div>
           <div class="drink-section">
             <div class="section-label">Gör så här</div>
-            <p class="drink-recipe-text">${d.recipe}</p>
+            <p class="drink-recipe-text">${d.strInstructions || 'Inga instruktioner tillgängliga.'}</p>
           </div>
         </div>
-      </div>
-    `).join('') + '</div>';
+        <div class="match-info">
+          Du har <span>${haveCount} av ${totalCount}</span> ingredienser
+        </div>
+      </div>`;
+    }).join('') + '</div>';
   }
 </script>
 </body>
