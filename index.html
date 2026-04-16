@@ -533,6 +533,9 @@
 
   // Load ingredient list on start
   async function loadIngredients() {
+    const input = document.getElementById('ingr-input');
+    input.placeholder = 'Laddar ingredienser…';
+    input.disabled = true;
     try {
       const res = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
       const data = await res.json();
@@ -542,8 +545,12 @@
         ...allIngredients.map(i => ({ label: i, ingredient: i, isBrand: false })),
         ...brandList.map(b => ({ label: b, ingredient: brandMap[b], isBrand: true }))
       ];
+      input.placeholder = 'Börja skriva en ingrediens eller ett varumärke…';
+      input.disabled = false;
+      input.focus();
     } catch(e) {
       console.error('Kunde inte ladda ingredienser', e);
+      input.placeholder = 'Kunde inte ladda ingredienser – ladda om sidan';
     }
   }
 
