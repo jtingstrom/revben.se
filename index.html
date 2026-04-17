@@ -264,9 +264,19 @@
       border-radius: 5px;
       color: var(--muted);
       font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
+      font-size: 12px;
       cursor: pointer;
       transition: background 0.12s, color 0.12s;
+      padding: 0 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    @media (max-width: 400px) {
+      .seg button { font-size: 11px; padding: 0 4px; }
+      .options-row { flex-direction: column; }
+      .opt { min-width: unset; }
     }
 
     .seg button.active {
