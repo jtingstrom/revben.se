@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drinkgenerator har bytt namn</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://www.gingenerator.com/" />
+  <meta http-equiv="refresh" content="10; url=https://www.gingenerator.com" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #2c2418; --surface: #161616;
+      --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.14);
+      --text: #f0ece4; --muted: #888; --accent: #d4a84b;
+      --radius: 10px; --radius-lg: 16px;
+    }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-weight: 300;
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 2rem;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0;
+    }
+    .card {
+      position: relative; z-index: 1;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 3rem 2.5rem;
+      max-width: 520px; width: 100%; text-align: center;
+    }
+    .glass-icon {
+      color: var(--accent); margin-bottom: 1.5rem;
+    }
+    .old-name {
+      font-size: 13px; color: var(--muted); letter-spacing: 0.05em;
+      text-transform: uppercase; margin-bottom: 1rem;
+      text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.2);
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 400; line-height: 1.2;
+      color: var(--text); margin-bottom: 0.5rem;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+    .divider {
+      width: 60px; height: 1px; background: var(--accent);
+      opacity: 0.3; margin: 1.5rem auto;
+    }
+    p {
+      font-size: 15px; color: var(--muted); line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px; width: 100%; height: 52px;
+      background: var(--surface); border: 1px solid var(--border2);
+      border-radius: var(--radius); color: var(--text);
+      font-family: 'Playfair Display', serif; font-size: 17px;
+      font-weight: 400; font-style: italic; text-decoration: none;
+      cursor: pointer; transition: border-color 0.15s, background 0.15s;
+    }
+    .btn:hover { border-color: var(--accent); background: rgba(212,168,75,0.05); }
+    .countdown {
+      margin-top: 1.25rem; font-size: 12px; color: var(--muted);
+    }
+    .countdown span { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="glass-icon">
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
+      <path d="M4 3h16l-6 9.5V20h2.5v1.5h-9V20H10v-7.5L4 3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <div class="old-name">Drinkgenerator</div>
+
+  <h1>Vi har bytt namn till<br>Gin <em>Generator</em></h1>
+
+  <div class="divider"></div>
+
+  <p>Samma recept, samma enkla sökning — nu under ett nytt namn och en ny adress. Du hittar oss på gingenerator.com.</p>
+
+  <a href="https://www.gingenerator.com" class="btn">
+    <span>✦</span> Gå till Gin Generator
+  </a>
+
+  <p class="countdown">Du skickas vidare automatiskt om <span id="sec">10</span> sekunder.</p>
+</div>
+
+<script>
+  let s = 10;
+  const el = document.getElementById('sec');
+  const timer = setInterval(() => {
+    s--;
+    el.textContent = s;
+    if (s <= 0) {
+      clearInterval(timer);
+      window.location.href = 'https://www.gingenerator.com';
+    }
+  }, 1000);
+</script>
+
+<!-- Default Statcounter code for GinGenerator https://gingenerator.com -->
+<script type="text/javascript">
+var sc_project=13222790; 
+var sc_invisible=1; 
+var sc_security="6a216fae"; 
+</script>
+<script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
+<noscript><div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/13222790/0/6a216fae/1/" alt="Web Analytics" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
+</body>
+</html>
