@@ -3,990 +3,122 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Primary SEO -->
-  <title>Drinkgenerator – Hitta drinkar med det du har hemma</title>
-  <meta name="description" content="Skriv in vad du har hemma och få förslag på drinkar direkt. Söker bland hundratals recept – ingen registrering krävs." />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.revben.se/" />
-  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-
-  <!-- Open Graph (Facebook, LinkedIn, iMessage m.fl.) -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://www.revben.se/" />
-  <meta property="og:title" content="Drinkgenerator – Hitta drinkar med det du har hemma" />
-  <meta property="og:description" content="Skriv in vad du har hemma och få förslag på drinkar direkt. Söker bland hundratals recept – ingen registrering krävs." />
-  <meta property="og:image" content="https://www.revben.se/preview.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:locale" content="sv_SE" />
-  <meta property="og:site_name" content="Revben" />
-
-  <!-- Twitter / X Cards -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://www.revben.se/" />
-  <meta name="twitter:title" content="Drinkgenerator – Hitta drinkar med det du har hemma" />
-  <meta name="twitter:description" content="Skriv in vad du har hemma och få förslag på drinkar direkt. Söker bland hundratals recept – ingen registrering krävs." />
-  <meta name="twitter:image" content="https://www.revben.se/preview.png" />
-
-  <!-- Schema.org structured data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Drinkgenerator",
-    "url": "https://www.revben.se/",
-    "description": "Skriv in vad du har hemma och få förslag på drinkar direkt. Söker bland hundratals recept – ingen registrering krävs.",
-    "applicationCategory": "FoodAndDrink",
-    "operatingSystem": "Web",
-    "inLanguage": "sv",
-    "isAccessibleForFree": true,
-    "offers": { "@type": "Offer", "price": "0" }
-  }
-  </script>
-
-  <!-- Favicon: RB, mörk bakgrund, guld text -->
+  <title>Drinkgenerator har bytt namn</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://www.gingenerator.com/" />
+  <meta http-equiv="refresh" content="10; url=https://www.gingenerator.com" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232E1A0E'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia%2C serif' font-size='13' font-weight='600' fill='%23d4a84b'%3ERB%3C/text%3E%3C/svg%3E" />
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232E1A0E'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia%2C serif' font-size='13' font-weight='600' fill='%23d4a84b'%3ERB%3C/text%3E%3C/svg%3E" />
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg:       #2c2418;
-      --surface:  #161616;
-      --surface2: #1f1f1f;
-      --border:   rgba(255,255,255,0.08);
-      --border2:  rgba(255,255,255,0.14);
-      --text:     #f0ece4;
-      --muted:    #888;
-      --accent:   #d4a84b;
-      --accent2:  #e8c97a;
-      --tag-bg:   rgba(212,168,75,0.12);
-      --tag-text: #d4a84b;
-      --radius:   10px;
-      --radius-lg:16px;
+      --bg: #2c2418; --surface: #161616;
+      --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.14);
+      --text: #f0ece4; --muted: #888; --accent: #d4a84b;
+      --radius: 10px; --radius-lg: 16px;
     }
-
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      background: var(--bg); color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-weight: 300;
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 2rem;
     }
-
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
+      content: ''; position: fixed; inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
-
-    header {
-      width: 100%;
-      max-width: 800px;
-      padding: 3.5rem 1.5rem 2.5rem;
-      position: relative;
-      z-index: 1;
+    .card {
+      position: relative; z-index: 1;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 3rem 2.5rem;
+      max-width: 520px; width: 100%; text-align: center;
     }
-
-    .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
-    .logo svg { color: var(--accent); flex-shrink: 0; }
-
+    .glass-icon {
+      color: var(--accent); margin-bottom: 1.5rem;
+    }
+    .old-name {
+      font-size: 13px; color: var(--muted); letter-spacing: 0.05em;
+      text-transform: uppercase; margin-bottom: 1rem;
+      text-decoration: line-through; text-decoration-color: rgba(255,255,255,0.2);
+    }
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 2.8rem);
-      font-weight: 400;
-      letter-spacing: -0.01em;
-      color: var(--text);
-      line-height: 1.1;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 400; line-height: 1.2;
+      color: var(--text); margin-bottom: 0.5rem;
     }
-
     h1 em { font-style: italic; color: var(--accent); }
-    .tagline { font-size: 20px; color: var(--muted); margin-top: 0.5rem; font-weight: 300; }
-
-    main {
-      width: 100%;
-      max-width: 800px;
-      padding: 0 1.5rem 4rem;
-      position: relative;
-      z-index: 1;
+    .divider {
+      width: 60px; height: 1px; background: var(--accent);
+      opacity: 0.3; margin: 1.5rem auto;
     }
-
-    .input-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .section-label {
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-    }
-
-    .autocomplete-wrap { position: relative; }
-
-    .autocomplete-wrap input {
-      width: 100%;
-      height: 44px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 0 14px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      font-weight: 300;
-      color: var(--text);
-      outline: none;
-      transition: border-color 0.15s;
-    }
-
-    .autocomplete-wrap input::placeholder { color: var(--muted); }
-    .autocomplete-wrap input:focus { border-color: var(--accent); }
-
-    .dropdown {
-      position: absolute;
-      top: calc(100% + 4px);
-      left: 0; right: 0;
-      background: var(--surface2);
-      border: 1px solid var(--border2);
-      border-radius: var(--radius);
-      max-height: 220px;
-      overflow-y: auto;
-      z-index: 100;
-      display: none;
-    }
-
-    .dropdown.open { display: block; }
-
-    .dropdown-item {
-      padding: 10px 14px;
-      font-size: 16px;
-      color: var(--text);
-      cursor: pointer;
-      transition: background 0.1s;
-    }
-
-    .dropdown-item:hover, .dropdown-item.highlighted {
-      background: rgba(212,168,75,0.1);
-      color: var(--accent);
-    }
-
-    .dropdown-item mark {
-      background: none;
-      color: var(--accent);
-      font-weight: 500;
-    }
-
-    .tags-area {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-top: 1rem;
-      min-height: 36px;
-      align-items: flex-start;
-    }
-
-    .tag {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      background: var(--tag-bg);
-      border: 1px solid rgba(212,168,75,0.2);
-      color: var(--tag-text);
-      border-radius: 999px;
-      padding: 5px 12px;
-      font-size: 15px;
-      font-weight: 400;
-      animation: tagIn 0.15s ease;
-    }
-
-    @keyframes tagIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-
-    .tag button {
-      background: none;
-      border: none;
-      color: rgba(212,168,75,0.5);
-      cursor: pointer;
-      font-size: 16px;
-      line-height: 1;
-      padding: 0;
-      transition: color 0.1s;
-    }
-
-    .tag button:hover { color: var(--accent); }
-    .hint-text { font-size: 15px; color: var(--muted); align-self: center; }
-
-    .options-row { display: flex; gap: 12px; margin-bottom: 1rem; flex-wrap: wrap; }
-
-    .opt {
-      flex: 1;
-      min-width: 140px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1rem;
-    }
-
-    .opt .section-label { margin-bottom: 0.5rem; }
-
-    .seg {
-      display: flex;
-      background: var(--surface2);
-      border-radius: 6px;
-      padding: 2px;
-      gap: 2px;
-    }
-
-    .seg button {
-      flex: 1;
-      height: 30px;
-      background: none;
-      border: none;
-      border-radius: 5px;
-      color: var(--muted);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      cursor: pointer;
-      transition: background 0.12s, color 0.12s;
-      padding: 0 6px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    @media (max-width: 400px) {
-      .seg button { font-size: 11px; padding: 0 4px; }
-      .options-row { flex-direction: column; }
-      .opt { min-width: unset; }
-    }
-
-    .seg button.active {
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--border2);
-    }
-
-    .btn-generate {
-      width: 100%;
-      height: 52px;
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: var(--radius);
-      color: var(--text);
-      font-family: 'Playfair Display', serif;
-      font-size: 20px;
-      font-weight: 400;
-      font-style: italic;
-      cursor: pointer;
-      transition: border-color 0.15s, background 0.15s;
+    p {
+      font-size: 15px; color: var(--muted); line-height: 1.7;
       margin-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
     }
-
-    .btn-generate:hover { border-color: var(--accent); background: rgba(212,168,75,0.05); }
-    .btn-generate:disabled { opacity: 0.35; cursor: not-allowed; }
-
-    .loading { text-align: center; padding: 3rem 0; }
-    .shaker { display: inline-block; font-size: 2rem; animation: shake 0.5s infinite alternate; }
-    @keyframes shake { from { transform: rotate(-15deg); } to { transform: rotate(15deg); } }
-    .loading p { margin-top: 1rem; color: var(--muted); font-size: 16px; }
-
-    .drinks { display: flex; flex-direction: column; gap: 12px; }
-
-    .drink-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      animation: cardIn 0.3s ease both;
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 10px; width: 100%; height: 52px;
+      background: var(--surface); border: 1px solid var(--border2);
+      border-radius: var(--radius); color: var(--text);
+      font-family: 'Playfair Display', serif; font-size: 17px;
+      font-weight: 400; font-style: italic; text-decoration: none;
+      cursor: pointer; transition: border-color 0.15s, background 0.15s;
     }
-
-    @keyframes cardIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .btn:hover { border-color: var(--accent); background: rgba(212,168,75,0.05); }
+    .countdown {
+      margin-top: 1.25rem; font-size: 12px; color: var(--muted);
     }
-
-    .drink-top {
-      padding: 1.25rem 1.5rem 1rem;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-    }
-
-    .drink-thumb {
-      width: 64px;
-      height: 64px;
-      border-radius: 8px;
-      object-fit: cover;
-      flex-shrink: 0;
-      background: var(--surface2);
-    }
-
-    .drink-thumb-placeholder {
-      width: 64px;
-      height: 64px;
-      border-radius: 8px;
-      background: var(--surface2);
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-    }
-
-    .drink-meta { flex: 1; min-width: 0; }
-
-    .drink-row1 {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 0.3rem;
-      gap: 8px;
-    }
-
-    .drink-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.38rem;
-      font-weight: 400;
-      color: var(--text);
-    }
-
-    .badges { display: flex; gap: 5px; flex-wrap: wrap; flex-shrink: 0; }
-
-    .badge {
-      font-size: 10px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-weight: 500;
-      padding: 3px 9px;
-      border-radius: 999px;
-    }
-
-    .badge-alc { background: rgba(212,168,75,0.12); color: var(--accent); border: 1px solid rgba(212,168,75,0.2); }
-    .badge-non { background: rgba(74,185,130,0.1); color: #4ab982; border: 1px solid rgba(74,185,130,0.2); }
-    .badge-cat { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid var(--border); }
-
-    .drink-glass { font-size: 14px; color: var(--muted); margin-bottom: 0.3rem; }
-
-    .drink-body { display: grid; grid-template-columns: 1fr 1fr; }
-
-    @media (max-width: 520px) { .drink-body { grid-template-columns: 1fr; } }
-
-    .drink-section { padding: 1rem 1.5rem; }
-    .drink-section + .drink-section { border-left: 1px solid var(--border); }
-
-    @media (max-width: 520px) {
-      .drink-section + .drink-section { border-left: none; border-top: 1px solid var(--border); }
-    }
-
-    .drink-section .section-label { margin-bottom: 0.5rem; }
-
-    .drink-ingr-list { list-style: none; font-size: 15px; color: var(--text); line-height: 1.9; }
-    .drink-ingr-list li::before { content: '—'; color: var(--accent); margin-right: 6px; font-size: 13px; }
-    .drink-ingr-list li.missing { color: var(--muted); }
-    .drink-ingr-list li.missing::before { color: #555; }
-
-    .drink-recipe-text { font-size: 15px; color: var(--text); line-height: 1.8; }
-
-    .match-info {
-      padding: 0.6rem 1.5rem;
-      font-size: 14px;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      background: rgba(0,0,0,0.2);
-    }
-
-    .match-info span { color: var(--accent); }
-
-    .no-results {
-      text-align: center;
-      padding: 3rem 0;
-      color: var(--muted);
-      font-size: 16px;
-    }
-
-    .no-results strong { display: block; font-size: 1.1rem; color: var(--text); margin-bottom: 0.5rem; font-weight: 400; }
-
-    .error { text-align: center; padding: 2rem; color: #e07070; font-size: 16px; }
-
-    footer {
-      width: 100%;
-      max-width: 800px;
-      padding: 0 1.5rem 2rem;
-      text-align: center;
-      font-size: 14px;
-      color: rgba(255,255,255,0.2);
-      position: relative;
-      z-index: 1;
-    }
-
-    footer a { color: rgba(212,168,75,0.4); text-decoration: none; }
-    footer a:hover { color: var(--accent); }
-
-
-    .lang-toggle {
-      position: fixed;
-      top: 1.2rem;
-      right: 1.5rem;
-      z-index: 999;
-      display: flex;
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: 999px;
-      padding: 2px;
-      gap: 2px;
-    }
-    .lang-toggle button {
-      height: 28px;
-      padding: 0 12px;
-      background: none;
-      border: none;
-      border-radius: 999px;
-      color: var(--muted);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.12s, color 0.12s;
-    }
-    .lang-toggle button.active {
-      background: var(--surface2);
-      color: var(--accent);
-      border: 1px solid var(--border2);
-    }
-    .scrollbar-thin::-webkit-scrollbar { width: 4px; }
-    .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
-    .scrollbar-thin::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+    .countdown span { color: var(--accent); }
   </style>
 </head>
 <body>
 
-<div class="lang-toggle">
-  <button id="btn-sv" class="active" onclick="setLang('sv')">SV</button>
-  <button id="btn-en" onclick="setLang('en')">EN</button>
-  <button id="btn-ro" onclick="setLang('ro')">RO</button>
-</div>
-
-<header>
-  <div class="logo">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+<div class="card">
+  <div class="glass-icon">
+    <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
       <path d="M4 3h16l-6 9.5V20h2.5v1.5h-9V20H10v-7.5L4 3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
     </svg>
-    <h1>Drink<em>generator</em></h1>
-  </div>
-  <p class="tagline">Skriv in vad du har hemma — vi blandar resten.</p>
-  <!-- lang:tagline -->
-</header>
-
-<main>
-
-  <div class="input-card">
-    <div class="section-label" id="label-ingr">Dina ingredienser</div>
-    <div class="autocomplete-wrap">
-      <input type="text" id="ingr-input" placeholder="Börja skriva en ingrediens…" id="ingr-input" autocomplete="off" />
-      <div class="dropdown scrollbar-thin" id="dropdown"></div>
-    </div>
-    <div class="tags-area" id="tags">
-      <span class="hint-text" id="hint-text">Inga ingredienser valda än.</span>
-    </div>
   </div>
 
-  <div class="options-row">
-    <div class="opt">
-      <div class="section-label" id="label-show">Visa</div>
-      <div class="seg" id="type-seg">
-        <button class="active" data-val="alla" onclick="selectSeg(this,'type-seg')" id="btn-alla">Alla</button>
-        <button data-val="Alcoholic" onclick="selectSeg(this,'type-seg')" id="btn-alc">Alkohol</button>
-        <button data-val="Non alcoholic" onclick="selectSeg(this,'type-seg')" id="btn-nonalc">Alkoholfria</button>
-      </div>
-    </div>
-    <div class="opt">
-      <div class="section-label" id="label-match">Matchning</div>
-      <div class="seg" id="match-seg">
-        <button class="active" data-val="any" onclick="selectSeg(this,'match-seg')" id="btn-any">Någon</button>
-        <button data-val="all" onclick="selectSeg(this,'match-seg')" id="btn-all">Alla</button>
-      </div>
-    </div>
-  </div>
+  <div class="old-name">Drinkgenerator</div>
 
-  <button class="btn-generate" id="gen-btn" onclick="search()">
-    <span>✦</span> <span id="btn-generate-text">Hitta drinkar</span>
-  </button>
+  <h1>Vi har bytt namn till<br>Gin <em>Generator</em></h1>
 
-  <div id="result"></div>
-</main>
+  <div class="divider"></div>
 
-<footer>
-  Recept från <a href="https://www.thecocktaildb.com" target="_blank">TheCocktailDB</a> · <span id="footer-text">Ingen inloggning krävs</span> · <a href="/kontakt.html">Kontakt</a> · Av Jan Tingström · <span style="color:var(--muted);font-size:11px;">v1.01</span>
-</footer>
+  <p>Samma recept, samma enkla sökning — nu under ett nytt namn och en ny adress. Du hittar oss på gingenerator.com.</p>
+
+  <a href="https://www.gingenerator.com" class="btn">
+    <span>✦</span> Gå till Gin Generator
+  </a>
+
+  <p class="countdown">Du skickas vidare automatiskt om <span id="sec">10</span> sekunder.</p>
+</div>
 
 <script>
-  // Swedish → English ingredient mapping
-  const svToEn = {"vodka": "Vodka", "gin": "Gin", "rom": "Rum", "vit rom": "White rum", "mörk rom": "Dark rum", "kryddrom": "Spiced rum", "kokosnötsrom": "Coconut rum", "whisky": "Scotch", "whiskey": "Whiskey", "bourbon": "Bourbon", "irländsk whiskey": "Irish Whiskey", "cognac": "Cognac", "brandy": "Brandy", "tequila": "Tequila", "mezcal": "Mezcal", "cachaca": "Cachaca", "pisco": "Pisco", "sake": "Sake", "champagne": "Champagne", "prosecco": "Prosecco", "vitt vin": "White wine", "rött vin": "Red wine", "rosévin": "Rose wine", "portvin": "Port", "sherry": "Sherry", "amaretto": "Amaretto", "baileys": "Baileys irish cream", "kahlúa": "Kahlua", "kahlua": "Kahlua", "cointreau": "Cointreau", "grand marnier": "Grand Marnier", "campari": "Campari", "aperol": "Aperol", "sambuca": "Sambuca", "jägermeister": "Jagermeister", "absint": "Absinthe", "frangelico": "Frangelico", "drambuie": "Drambuie", "galliano": "Galliano", "midori": "Midori melon liqueur", "blå curacao": "Blue Curacao", "hallonlikör": "Raspberry liqueur", "persikoschnaps": "Peach schnapps", "jordgubbsschnaps": "Strawberry schnapps", "trippel sec": "Triple sec", "elderblommslikör": "Elderflower liqueur", "sloegin": "Sloe gin", "tonic": "Tonic water", "tonicvatten": "Tonic water", "sodavatten": "Soda water", "club soda": "Club soda", "cola": "Coca-Cola", "coca-cola": "Coca-Cola", "ingefärsbier": "Ginger beer", "ginger beer": "Ginger beer", "ingefärsdricka": "Ginger ale", "ginger ale": "Ginger ale", "lemonad": "Lemonade", "sprite": "Sprite", "rödbull": "Red Bull", "red bull": "Red Bull", "espresso": "Espresso", "kaffe": "Coffee", "apelsinjuice": "Orange juice", "tranbärsjuice": "Cranberry juice", "ananassaft": "Pineapple juice", "grapefruktsaft": "Grapefruit juice", "tomatjuice": "Tomato juice", "äppeljuice": "Apple juice", "limejuice": "Lime juice", "citronsaft": "Lemon juice", "granatäppeljuice": "Pomegranate juice", "mangojuice": "Mango juice", "persikajuice": "Peach juice", "päronjuice": "Pear juice", "grädde": "Heavy cream", "vispgrädde": "Whipped cream", "mjölk": "Milk", "kokosmjölk": "Coconut milk", "kokosgräddde": "Coconut cream", "äggvita": "Egg white", "äggula": "Egg yolk", "ägg": "Egg", "kondenserad mjölk": "Condensed milk", "lime": "Lime", "citron": "Lemon", "apelsin": "Orange", "grapefrukt": "Grapefruit", "jordgubbe": "Strawberry", "hallon": "Raspberry", "blåbär": "Blueberry", "björnbär": "Blackberry", "körsbär": "Cherry", "ananas": "Pineapple", "kokos": "Coconut", "banan": "Banana", "äpple": "Apple", "päron": "Pear", "mango": "Mango", "passionsfrukt": "Passion fruit", "persika": "Peach", "vattenmelon": "Watermelon", "granatäpple": "Pomegranate", "lychee": "Lychee", "melon": "Melon", "fikon": "Fig", "gurka": "Cucumber", "mynta": "Mint", "basilika": "Basil", "rosmarin": "Rosemary", "timjan": "Thyme", "ingefära": "Ginger", "selleri": "Celery", "tomat": "Tomato", "jalapeño": "Jalapeño", "chili": "Chili", "vitlök": "Garlic", "lök": "Onion", "koriander": "Cilantro", "dill": "Dill", "lavendel": "Lavender", "enkel sirap": "Simple syrup", "sockerlag": "Simple syrup", "granadine": "Grenadine", "grenadine": "Grenadine", "honung": "Honey", "lönnsirap": "Maple syrup", "agave": "Agave syrup", "chokladsirap": "Chocolate syrup", "karamellsirap": "Caramel syrup", "hallonsirap": "Raspberry syrup", "jordgubbssirap": "Strawberry syrup", "myntasirap": "Mint syrup", "ingefärssirap": "Ginger syrup", "socker": "Sugar", "florsocker": "Powdered sugar", "farinsocker": "Brown sugar", "angostura": "Angostura bitters", "bitters": "Bitters", "apelsinbitters": "Orange bitters", "kanel": "Cinnamon", "muskot": "Nutmeg", "kardemumma": "Cardamom", "nejlika": "Cloves", "stjärnanis": "Star anise", "vanilj": "Vanilla", "salt": "Salt", "peppar": "Pepper", "cayennepeppar": "Cayenne", "is": "Ice", "vatten": "Water", "örtte": "Tea", "grönt te": "Green tea", "kokosnötsvatten": "Coconut water", "rosenvatten": "Rose water", "aprikosbrännvin": "Apricot brandy", "körsbärsbrännvin": "Cherry brandy", "persikabrandy": "Peach brandy", "worcestershiresås": "Worcestershire sauce", "tabasco": "Tabasco", "sriracha": "Sriracha", "olivolja": "Olive oil", "smör": "Butter", "gräddeost": "Cream cheese", "choklad": "Chocolate", "kakao": "Cocoa powder", "matcha": "Matcha"};
-
-  // Romanian → English ingredient mapping
-  const roToEn = {"vodcă": "Vodka", "vodca": "Vodka", "gin": "Gin", "rom": "Rum", "rom alb": "White rum", "rom negru": "Dark rum", "rom condimentat": "Spiced rum", "rom de cocos": "Coconut rum", "whisky": "Scotch", "whiskey": "Whiskey", "bourbon": "Bourbon", "whiskey irlandez": "Irish Whiskey", "coniac": "Cognac", "brandy": "Brandy", "tequila": "Tequila", "mezcal": "Mezcal", "cachaça": "Cachaca", "pisco": "Pisco", "sake": "Sake", "șampanie": "Champagne", "sampanie": "Champagne", "prosecco": "Prosecco", "vin alb": "White wine", "vin roșu": "Red wine", "vin rosu": "Red wine", "vin roze": "Rose wine", "porto": "Port", "sherry": "Sherry", "amaretto": "Amaretto", "baileys": "Baileys irish cream", "kahlua": "Kahlua", "cointreau": "Cointreau", "grand marnier": "Grand Marnier", "campari": "Campari", "aperol": "Aperol", "sambuca": "Sambuca", "jagermeister": "Jagermeister", "absint": "Absinthe", "frangelico": "Frangelico", "drambuie": "Drambuie", "midori": "Midori melon liqueur", "curacao albastru": "Blue Curacao", "lichior de zmeură": "Raspberry liqueur", "lichior de piersici": "Peach schnapps", "triple sec": "Triple sec", "lichior de soc": "Elderflower liqueur", "apă tonică": "Tonic water", "apa tonica": "Tonic water", "tonic": "Tonic water", "apă carbogazoasă": "Soda water", "soda": "Soda water", "cola": "Coca-Cola", "coca-cola": "Coca-Cola", "bere de ghimbir": "Ginger beer", "ginger beer": "Ginger beer", "apă cu ghimbir": "Ginger ale", "limonadă": "Lemonade", "limonada": "Lemonade", "sprite": "Sprite", "red bull": "Red Bull", "espresso": "Espresso", "cafea": "Coffee", "suc de portocale": "Orange juice", "suc de merișoare": "Cranberry juice", "suc de ananas": "Pineapple juice", "suc de grapefruit": "Grapefruit juice", "suc de roșii": "Tomato juice", "suc de rosii": "Tomato juice", "suc de mere": "Apple juice", "suc de lămâie": "Lemon juice", "suc de lamaie": "Lemon juice", "suc de lime": "Lime juice", "suc de rodie": "Pomegranate juice", "suc de mango": "Mango juice", "suc de piersici": "Peach juice", "suc de pere": "Pear juice", "smântână": "Heavy cream", "smantana": "Heavy cream", "frișcă": "Whipped cream", "frisca": "Whipped cream", "lapte": "Milk", "lapte de cocos": "Coconut milk", "cremă de cocos": "Coconut cream", "albuș de ou": "Egg white", "albus de ou": "Egg white", "gălbenuș de ou": "Egg yolk", "galbenus de ou": "Egg yolk", "ou": "Egg", "lapte condensat": "Condensed milk", "lime": "Lime", "lămâie": "Lemon", "lamaie": "Lemon", "portocală": "Orange", "portocala": "Orange", "grapefruit": "Grapefruit", "căpșuni": "Strawberry", "capsuni": "Strawberry", "zmeură": "Raspberry", "zmeura": "Raspberry", "afine": "Blueberry", "mure": "Blackberry", "cireșe": "Cherry", "cirese": "Cherry", "ananas": "Pineapple", "cocos": "Coconut", "banană": "Banana", "banana": "Banana", "măr": "Apple", "mar": "Apple", "păr": "Pear", "par": "Pear", "mango": "Mango", "fructul pasiunii": "Passion fruit", "piersică": "Peach", "piersica": "Peach", "pepene roșu": "Watermelon", "pepene rosu": "Watermelon", "rodie": "Pomegranate", "lychee": "Lychee", "pepene galben": "Melon", "smochine": "Fig", "castravete": "Cucumber", "castraveți": "Cucumber", "castraveti": "Cucumber", "mentă": "Mint", "menta": "Mint", "busuioc": "Basil", "rozmarin": "Rosemary", "cimbru": "Thyme", "ghimbir": "Ginger", "țelină": "Celery", "telina": "Celery", "roșie": "Tomato", "rosie": "Tomato", "jalapeño": "Jalapeño", "ardei iute": "Chili", "usturoi": "Garlic", "ceapă": "Onion", "ceapa": "Onion", "coriandru": "Cilantro", "mărar": "Dill", "marar": "Dill", "lavandă": "Lavender", "lavanda": "Lavender", "sirop simplu": "Simple syrup", "grenadină": "Grenadine", "grenadina": "Grenadine", "miere": "Honey", "sirop de arțar": "Maple syrup", "agave": "Agave syrup", "sirop de ciocolată": "Chocolate syrup", "sirop de caramel": "Caramel syrup", "sirop de zmeură": "Raspberry syrup", "sirop de căpșuni": "Strawberry syrup", "sirop de mentă": "Mint syrup", "sirop de ghimbir": "Ginger syrup", "zahăr": "Sugar", "zahar": "Sugar", "zahăr pudră": "Powdered sugar", "zahar brun": "Brown sugar", "angostura": "Angostura bitters", "bitters": "Bitters", "scorțișoară": "Cinnamon", "scortisoara": "Cinnamon", "nucșoară": "Nutmeg", "nucsoara": "Nutmeg", "cardamom": "Cardamom", "cuișoare": "Cloves", "cuisoare": "Cloves", "anason stelat": "Star anise", "vanilie": "Vanilla", "sare": "Salt", "piper": "Pepper", "cayenne": "Cayenne", "gheață": "Ice", "gheata": "Ice", "apă": "Water", "apa": "Water", "ceai": "Tea", "ceai verde": "Green tea", "apă de cocos": "Coconut water", "apă de trandafiri": "Rose water", "sos worcestershire": "Worcestershire sauce", "tabasco": "Tabasco", "sriracha": "Sriracha", "ulei de măsline": "Olive oil", "unt": "Butter", "ciocolată": "Chocolate", "ciocolata": "Chocolate", "cacao": "Cocoa powder", "matcha": "Matcha"};
-
-  // Brand → ingredient mapping
-  const brandMap = {
-    'Absolut': 'Vodka', 'Absolut Vodka': 'Vodka',
-    'Smirnoff': 'Vodka', 'Grey Goose': 'Vodka', 'Belvedere': 'Vodka', 'Ketel One': 'Vodka', 'Stolichnaya': 'Vodka', 'Stoli': 'Vodka',
-    'Bombay': 'Gin', 'Bombay Sapphire': 'Gin', 'Hendricks': 'Gin', "Hendrick's": 'Gin', 'Tanqueray': 'Gin', 'Beefeater': 'Gin', 'Gordon\'s': 'Gin', 'Gordons': 'Gin', 'Monkey 47': 'Gin',
-    'Bacardi': 'White Rum', 'Captain Morgan': 'Dark Rum', 'Havana Club': 'Cuban Rum', 'Malibu': 'Coconut Rum', 'Mount Gay': 'Dark Rum',
-    'Jack Daniel\'s': 'Whiskey', 'Jack Daniels': 'Whiskey', 'Jim Beam': 'Bourbon', 'Maker\'s Mark': 'Bourbon', 'Makers Mark': 'Bourbon', 'Wild Turkey': 'Bourbon', 'Bulleit': 'Bourbon',
-    'Johnnie Walker': 'Scotch', 'Glenfiddich': 'Scotch', 'Macallan': 'Scotch', 'Laphroaig': 'Scotch', 'Chivas': 'Scotch', 'Chivas Regal': 'Scotch',
-    'Jameson': 'Irish Whiskey', 'Bushmills': 'Irish Whiskey',
-    'Jose Cuervo': 'Tequila', 'Patron': 'Tequila', 'Don Julio': 'Tequila', 'Herradura': 'Tequila', 'Espolon': 'Tequila',
-    'Hennessy': 'Cognac', 'Remy Martin': 'Cognac', 'Rémy Martin': 'Cognac', 'Courvoisier': 'Cognac',
-    'Baileys': 'Baileys irish cream', "Bailey's": 'Baileys irish cream',
-    'Kahlua': 'Kahlua', 'Kahluá': 'Kahlua',
-    'Aperol': 'Aperol', 'Campari': 'Campari', 'Cointreau': 'Triple sec', 'Grand Marnier': 'Grand Marnier',
-    'Jagermeister': 'Jagermeister', 'Jägermeister': 'Jagermeister',
-    'Amaretto': 'Amaretto', 'Disaronno': 'Amaretto',
-    'Midori': 'Midori melon liqueur', 'Blue Curacao': 'Blue Curacao', 'Drambuie': 'Drambuie',
-    'Prosecco': 'Prosecco', 'Champagne': 'Champagne',
-    'Angostura': 'Angostura bitters', 'Peychaud\'s': 'Peychaud Bitters',
-    'St-Germain': 'Elderflower liqueur', 'Frangelico': 'Frangelico', 'Sambuca': 'Sambuca',
-    'Pimm\'s': 'Pimms', 'Pimms': 'Pimms', 'Tia Maria': 'Tia maria',
-    'Absolut Citron': 'Lemon vodka', 'Absolut Peppar': 'Pepper vodka'
-  };
-
-  // Build combined search list: ingredients + brands
-  let allIngredients = [];
-  let brandList = [];
-  let searchList = []; // {label, ingredient, isBrand}
-  let selected = new Set(); // stores ingredient names
-  let selectedLabels = new Map(); // ingredient -> display label
-  let drinkType = 'alla';
-  let matchMode = 'any';
-  let highlighted = -1;
-  let dropdownItems = [];
-
-  // Load ingredient list on start
-  function loadIngredients() {
-    allIngredients = ["Light rum", "Applejack", "Gin", "Dark rum", "Sweet Vermouth", "Strawberry schnapps", "Scotch", "Apricot brandy", "Triple sec", "Southern Comfort", "Orange bitters", "Brandy", "Lemon vodka", "Blended whiskey", "Dry Vermouth", "Amaretto", "Tea", "Champagne", "Coffee liqueur", "Bourbon", "Tequila", "Vodka", "Kahlua", "Malibu", "Lime juice", "Lime", "Lemon juice", "Simple syrup", "Grenadine", "Ice", "Water", "Sugar", "Salt", "Coca-Cola", "Soda water", "Tonic water", "Orange juice", "Cranberry juice", "Pineapple juice", "Grapefruit juice", "Tomato juice", "Apple juice", "Lemon", "Orange", "Grapefruit", "Peach schnapps", "Coconut rum", "Spiced rum", "Raspberry liqueur", "Blue Curacao", "Midori melon liqueur", "Baileys irish cream", "Creme de Cacao", "Creme de Menthe", "Blackberry brandy", "Peach brandy", "Cherry brandy", "Sloe gin", "Melon liqueur", "Lychee liqueur", "Passion fruit liqueur", "Elderflower liqueur", "Chambord raspberry liqueur", "Frangelico", "Drambuie", "Galliano", "Sambuca", "Absinthe", "Pernod", "Ouzo", "Jagermeister", "Campari", "Aperol", "Cointreau", "Grand Marnier", "Curacao", "Rum", "White rum", "Cuban rum", "151 proof rum", "Cachaca", "Pisco", "Sake", "Prosecco", "Sparkling wine", "White wine", "Red wine", "Port", "Sherry", "Vermouth", "Bitters", "Angostura bitters", "Peychaud bitters", "Orange flower water", "Rose water", "Coconut cream", "Coconut milk", "Heavy cream", "Whipped cream", "Half-and-half", "Milk", "Egg white", "Egg yolk", "Honey", "Maple syrup", "Agave syrup", "Orgeat syrup", "Falernum", "Raspberry syrup", "Strawberry syrup", "Mint syrup", "Ginger syrup", "Passion fruit syrup", "Coffee syrup", "Vanilla extract", "Chocolate syrup", "Caramel syrup", "Hazelnut syrup", "Cucumber", "Mint", "Basil", "Rosemary", "Thyme", "Ginger", "Pepper", "Celery", "Tomato", "Watermelon", "Mango", "Passion fruit", "Peach", "Strawberry", "Raspberry", "Blueberry", "Blackberry", "Cherry", "Pineapple", "Coconut", "Banana", "Apple", "Pear", "Pomegranate", "Lychee", "Melon", "Fig", "Tamarind", "Lavender", "Cardamom", "Cinnamon", "Nutmeg", "Cloves", "Star anise", "Vanilla", "Club soda", "Ginger beer", "Ginger ale", "Lemon-lime soda", "Root beer", "Cream soda", "Espresso", "Coffee", "Green tea", "Lemonade", "Pomegranate juice", "Mango juice", "Peach juice", "Watermelon juice", "Carrot juice", "Coconut water", "Hot sauce", "Worcestershire sauce", "Tabasco", "Sriracha", "Olive oil", "Condensed milk", "Powdered sugar", "Brown sugar", "Demerara sugar", "Agave", "Molasses", "Corn syrup", "Peanut butter", "Egg", "Cream cheese", "Butter", "Ice cream", "Sorbet", "Chocolate", "Dark chocolate", "White chocolate", "Cocoa powder", "Matcha", "Beetroot", "Hibiscus", "Rose", "Saffron", "Allspice", "Anise", "Fennel", "Dill", "Cilantro", "Parsley", "Sage", "Tarragon", "Chervil", "Chives", "Scallion", "Onion", "Garlic", "Shallot", "Jalape\u00f1o", "Chili", "Cayenne", "Paprika", "Cumin", "Coriander", "Turmeric", "Garam masala", "Curry powder", "Five spice", "Sumac", "Za'atar", "Harissa", "Miso", "Soy sauce", "Fish sauce", "Oyster sauce", "Rice vinegar", "Apple cider vinegar", "Balsamic vinegar", "Red wine vinegar", "White wine vinegar", "Lemon zest", "Orange zest", "Lime zest", "Grapefruit zest", "Peppermint", "Spearmint", "Eucalyptus", "Chamomile", "Elderflower", "Hibiscus flower", "Butterfly pea flower", "Activated charcoal", "Spirulina", "Matcha powder", "Charcoal", "Peach nectar", "Guava juice", "Papaya juice", "Passion fruit juice", "Pear juice", "Apple cider", "Horchata", "Tamarind juice", "Aloe vera", "Rosewater", "Orange blossom water", "Kaffir lime", "Lemongrass", "Galangal", "Makrut lime", "Pandan", "Yuzu", "Calamansi", "Blood orange", "Meyer lemon", "Bergamot", "Pomelo", "Tangelo", "Kumquat", "Clementine", "Mandarin", "Tangerine", "Nectarine", "Apricot", "Plum", "Prune", "Grape", "Currant", "Gooseberry", "Elderberry", "A\u00e7a\u00ed", "Goji berry", "Mulberry", "Boysenberry", "Lingonberry", "Cloudberry", "Sea buckthorn", "Aronia", "Chokeberry", "Hawthorn", "Rosehip", "Quince", "Medlar", "Loquat", "Persimmon", "Pawpaw", "Jackfruit", "Durian", "Rambutan", "Longan", "Mangosteen", "Starfruit", "Dragon fruit", "Pitaya", "Guava", "Papaya", "Cherimoya", "Soursop", "Breadfruit", "Plantain", "Tamarillo", "Pepino", "Feijoa", "Ackee", "Carambola", "Babaco", "Naranjilla", "Granadilla", "Maracuya", "Tumbo", "Tomate de arbol", "Lucuma", "Camu camu", "Maca", "Yacon", "Aguaymanto", "Tuna", "Noni", "Mamey", "Sapote", "Canistel", "Abiu", "Grumichama", "Jabuticaba", "Cupua\u00e7u", "Acerola", "Caj\u00e1", "Siriguela", "Umbu", "Pitanga", "Ara\u00e7\u00e1", "Cagaita", "Pequi", "Buriti", "Bacaba", "Murici", "Tucum\u00e3", "Pupunha", "Cupuacu", "Copoazu", "Graviola", "Biriba", "Bacuri", "Uxi", "Tapereb\u00e1", "Mapati", "Pitomba", "Cambuc\u00e1", "Gabiroba", "Baru", "Coquinho azedo", "Mangaba", "Caju\u00ed", "Maca\u00faba", "Bocaiuva", "Acuri", "Baba\u00e7u", "Inaj\u00e1", "Patau\u00e1", "Andiroba", "Copa\u00edba", "Cumaru", "Breu", "Copal", "Frankincense", "Myrrh", "Benzoin", "Labdanum", "Vetiver", "Patchouli", "Sandalwood", "Cedarwood", "Juniper", "Pine", "Fir", "Spruce", "Tea tree", "Jasmine", "Ylang-ylang", "Neroli", "Petitgrain", "Key lime", "Persian lime", "Finger lime", "Australian lime", "Desert lime", "Native lime", "Round lime", "Sweet lime", "Wild lime", "Tahiti lime", "Mexican lime", "West Indian lime", "Rangpur lime", "Rhind lime", "Spanish lime", "Wild citron"];
-    brandList = Object.keys(brandMap);
-    // Swedish entries that map to English ingredients
-    const svEntries = Object.entries(svToEn).map(([sv, en]) => ({
-      label: sv.charAt(0).toUpperCase() + sv.slice(1),
-      ingredient: en,
-      isBrand: false,
-      isSv: true
-    }));
-    const roEntries = Object.entries(roToEn).map(([ro, en]) => ({
-      label: ro.charAt(0).toUpperCase() + ro.slice(1),
-      ingredient: en,
-      isBrand: false,
-      isRo: true
-    }));
-    // Brands and Swedish entries always included; deduplicate plain ingredients only
-    const brandAndSv = [
-      ...brandList.map(b => ({ label: b, ingredient: brandMap[b], isBrand: true })),
-      ...svEntries,
-      ...roEntries
-    ];
-    const brandAndSvLabels = new Set(brandAndSv.map(s => s.label.toLowerCase()));
-    const ingredientEntries = allIngredients
-      .filter(i => !brandAndSvLabels.has(i.toLowerCase()))
-      .map(i => ({ label: i, ingredient: i, isBrand: false }));
-    searchList = [...ingredientEntries, ...brandAndSv];
-  }
-
-  loadIngredients();
-
-  // Autocomplete
-  const input = document.getElementById('ingr-input');
-  const dropdown = document.getElementById('dropdown');
-
-  input.addEventListener('input', () => {
-    const q = input.value.trim().toLowerCase();
-    highlighted = -1;
-    if (q.length < 1) { closeDropdown(); return; }
-
-    dropdownItems = searchList
-      .filter(s => s.label.toLowerCase().includes(q) && !selected.has(s.ingredient))
-      .slice(0, 12);
-
-    if (dropdownItems.length === 0) { closeDropdown(); return; }
-
-    dropdown.innerHTML = dropdownItems.map((item, idx) => {
-      const re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
-      const hl = item.label.replace(re, '<mark>$1</mark>');
-      const hint = item.isBrand
-        ? '<span style="font-size:12px;color:var(--muted);margin-left:6px;">→ ' + item.ingredient + '</span>'
-        : item.isSv
-        ? '<span style="font-size:11px;color:var(--muted);margin-left:6px;">🇸🇪</span>'
-        : item.isRo
-        ? '<span style="font-size:11px;color:var(--muted);margin-left:6px;">🇷🇴</span>'
-        : '';
-      return '<div class="dropdown-item" onmousedown="pickItem(' + idx + ')">' + hl + hint + '</div>';
-    }).join('');
-
-    dropdown.classList.add('open');
-  });
-
-  input.addEventListener('keydown', e => {
-    const items = dropdown.querySelectorAll('.dropdown-item');
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      highlighted = Math.min(highlighted + 1, items.length - 1);
-      updateHighlight(items);
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      highlighted = Math.max(highlighted - 1, -1);
-      updateHighlight(items);
-    } else if (e.key === 'Enter') {
-      e.preventDefault();
-      if (highlighted >= 0 && dropdownItems[highlighted]) {
-        pickItem(highlighted);
-      }
-    } else if (e.key === 'Escape') {
-      closeDropdown();
+  let s = 10;
+  const el = document.getElementById('sec');
+  const timer = setInterval(() => {
+    s--;
+    el.textContent = s;
+    if (s <= 0) {
+      clearInterval(timer);
+      window.location.href = 'https://www.gingenerator.com';
     }
-  });
-
-  function updateHighlight(items) {
-    items.forEach((el, i) => el.classList.toggle('highlighted', i === highlighted));
-  }
-
-  document.addEventListener('click', e => {
-    if (!e.target.closest('.autocomplete-wrap')) closeDropdown();
-  });
-
-  function closeDropdown() {
-    dropdown.classList.remove('open');
-    dropdown.innerHTML = '';
-    dropdownItems = [];
-    highlighted = -1;
-  }
-
-  function pickItem(idx) {
-    const item = dropdownItems[idx];
-    if (!item) return;
-    selected.add(item.ingredient);
-    const displayLabel = item.isBrand
-      ? item.label + ' (' + item.ingredient + ')'
-      : item.isSv
-      ? item.label + ' (' + item.ingredient + ')'
-      : item.label;
-    selectedLabels.set(item.ingredient, displayLabel);
-    input.value = '';
-    closeDropdown();
-    renderTags();
-    input.focus();
-  }
-
-  function removeTag(name) {
-    selected.delete(name);
-    selectedLabels.delete(name);
-    renderTags();
-  }
-
-  function renderTags() {
-    const container = document.getElementById('tags');
-    container.innerHTML = '';
-    if (selected.size === 0) {
-      container.innerHTML = '<span class="hint-text">Inga ingredienser valda än.</span>';
-      return;
-    }
-    selected.forEach(t => {
-      const tag = document.createElement('span');
-      tag.className = 'tag';
-      const safe = t.replace(/'/g, "\\'");
-      tag.innerHTML = `${t} <button onclick="removeTag('${safe}')" title="Ta bort">×</button>`;
-      container.appendChild(tag);
-    });
-  }
-
-  function selectSeg(btn, segId) {
-    document.querySelectorAll('#' + segId + ' button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    if (segId === 'type-seg') drinkType = btn.dataset.val;
-    if (segId === 'match-seg') matchMode = btn.dataset.val;
-  }
-
-  async function search() {
-    if (selected.size === 0) { alert(t('alertIngr')); return; }
-
-    const btn = document.getElementById('gen-btn');
-    const result = document.getElementById('result');
-    btn.disabled = true;
-    result.innerHTML = `<div class="loading"><div class="shaker">🍸</div><p>${t('loading')}</p></div>`;
-
-    try {
-      // Fetch drinks for each ingredient
-      const ingredientList = [...selected];
-      const promises = ingredientList.map(ing =>
-        fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(ing)}`)
-          .then(r => r.json())
-          .then(d => ({ ing, drinks: Array.isArray(d.drinks) ? d.drinks : [] }))
-          .catch(() => ({ ing, drinks: [] }))
-      );
-
-      const results = await Promise.all(promises);
-
-      // Count matches per drink
-      const drinkMap = {};
-      results.forEach(({ ing, drinks }) => {
-        drinks.forEach(d => {
-          if (!drinkMap[d.idDrink]) {
-            drinkMap[d.idDrink] = { id: d.idDrink, name: d.strDrink, thumb: d.strDrinkThumb, matched: new Set() };
-          }
-          drinkMap[d.idDrink].matched.add(ing);
-        });
-      });
-
-      // Filter by match mode
-      let matches = Object.values(drinkMap).filter(d =>
-        matchMode === 'all' ? d.matched.size === ingredientList.length : d.matched.size >= 1
-      );
-
-      // Sort by number of matched ingredients descending
-      matches.sort((a, b) => b.matched.size - a.matched.size);
-
-      // Limit to top 12
-      matches = matches.slice(0, 12);
-
-      if (matches.length === 0) {
-        result.innerHTML = `<div class="no-results"><strong>Inga drinkar hittades</strong>Prova färre ingredienser eller byt till "Någon" som matchning.</div>`;
-        btn.disabled = false;
-        return;
-      }
-
-      // Fetch full details for each drink
-      const detailPromises = matches.map(m =>
-        fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${m.id}`)
-          .then(r => r.json())
-          .then(d => d.drinks ? d.drinks[0] : null)
-      );
-
-      const details = (await Promise.all(detailPromises)).filter(Boolean);
-
-      // Filter by alcohol type
-      let filtered = details;
-      if (drinkType !== 'alla') {
-        filtered = details.filter(d => d.strAlcoholic === drinkType);
-      }
-
-      if (filtered.length === 0) {
-        result.innerHTML = `<div class="no-results"><strong>Inga matchningar</strong>Prova att ändra filtret till "Alla".</div>`;
-        btn.disabled = false;
-        return;
-      }
-
-      result.innerHTML = `<div class="loading"><div class="shaker">🌐</div><p>${t('translating')}</p></div>`;
-      const translated = (lang === 'sv' || lang === 'ro') ? await translateDrinks(filtered) : filtered;
-      renderDrinks(translated, ingredientList);
-    } catch(e) {
-      result.innerHTML = `<div class="error">Något gick fel, försök igen.</div>`;
-    }
-
-    btn.disabled = false;
-  }
-
-  // Translate text via MyMemory (free, no key needed)
-  async function translateText(text) {
-    if (!text || text.length < 5) return text;
-    try {
-      const targetLang = lang === 'ro' ? 'ro' : 'sv'; const url = 'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=en|' + targetLang;
-      const res = await fetch(url);
-      const data = await res.json();
-      if (data.responseStatus === 200 && data.responseData?.translatedText) {
-        return data.responseData.translatedText;
-      }
-    } catch(e) {}
-    return text;
-  }
-
-  async function translateDrinks(drinks) {
-    return await Promise.all(drinks.map(async d => {
-      const translated = Object.assign({}, d);
-      translated.strInstructions = await translateText(d.strInstructions);
-      return translated;
-    }));
-  }
-
-  function renderDrinks(drinks, myIngredients) {
-    const result = document.getElementById('result');
-    const myLower = myIngredients.map(i => i.toLowerCase());
-
-    result.innerHTML = '<div class="drinks">' + drinks.map((d, idx) => {
-      // Build ingredient list
-      const ingrs = [];
-      for (let i = 1; i <= 15; i++) {
-        const ing = d[`strIngredient${i}`];
-        const msr = d[`strMeasure${i}`];
-        if (!ing) break;
-        const have = myLower.some(m => ing.toLowerCase().includes(m) || m.includes(ing.toLowerCase()));
-        ingrs.push({ ing, msr, have });
-      }
-
-      const haveCount = ingrs.filter(i => i.have).length;
-      const totalCount = ingrs.length;
-
-      const isAlc = d.strAlcoholic === 'Alcoholic';
-
-      return `
-      <div class="drink-card" style="animation-delay:${idx * 0.06}s">
-        <div class="drink-top">
-          ${d.strDrinkThumb
-            ? `<img class="drink-thumb" src="${d.strDrinkThumb}/preview" alt="${d.strDrink}" loading="lazy" />`
-            : `<div class="drink-thumb-placeholder">🍹</div>`}
-          <div class="drink-meta">
-            <div class="drink-row1">
-              <div class="drink-name">${d.strDrink}</div>
-              <div class="badges">
-                <span class="badge ${isAlc ? 'badge-alc' : 'badge-non'}">${isAlc ? t('alcohol') : t('nonAlcohol')}</span>
-                ${d.strCategory ? `<span class="badge badge-cat">${d.strCategory}</span>` : ''}
-              </div>
-            </div>
-            ${d.strGlass ? `<div class="drink-glass">${t('glass')}: ${d.strGlass}</div>` : ''}
-          </div>
-        </div>
-        <div class="drink-body">
-          <div class="drink-section">
-            ${t('ingredients')}
-            <ul class="drink-ingr-list">
-              ${ingrs.map(i => `
-                <li class="${i.have ? '' : 'missing'}">
-                  ${i.msr ? i.msr.trim() + ' ' : ''}${i.ing}${!i.have ? ' ✗' : ''}
-                </li>`).join('')}
-            </ul>
-          </div>
-          <div class="drink-section">
-            ${t('instructions')}
-            <p class="drink-recipe-text">${d.strInstructions || t('noInstructions')}</p>
-          </div>
-        </div>
-        <div class="match-info">
-          ${t('youHave')} <span>${haveCount} ${t('of')} ${totalCount}</span>
-        </div>
-      </div>`;
-    }).join('') + '</div>';
-  }
-  // ── i18n ──────────────────────────────────────────────
-  const i18n = {
-    sv: {
-      tagline: 'Skriv in vad du har hemma — vi blandar resten.',
-      labelIngr: 'Dina ingredienser',
-      placeholder: 'Börja skriva en ingrediens eller ett varumärke…',
-      hintText: 'Inga ingredienser valda än.',
-      labelShow: 'Visa', btnAlla: 'Alla', btnAlc: 'Alkohol', btnNonalc: 'Alkoholfria',
-      labelMatch: 'Matchning', btnAny: 'Någon', btnAll: 'Alla',
-      btnGenerate: 'Hitta drinkar', footerText: 'Ingen inloggning krävs',
-      loading: 'Letar i receptbasen…', translating: 'Översätter recept…',
-      noResults: 'Inga drinkar hittades',
-      noResultsHint: 'Prova färre ingredienser eller byt till "Någon" som matchning.',
-      noMatch: 'Inga matchningar', noMatchHint: 'Prova att ändra filtret till "Alla".',
-      youHave: 'Du har', of: 'av', ingredients: 'Ingredienser', instructions: 'Gör så här',
-      glass: 'Glas', alcohol: 'Alkohol', nonAlcohol: 'Alkoholfri',
-      noInstructions: 'Inga instruktioner tillgängliga.',
-      error: 'Något gick fel, försök igen.', alertIngr: 'Välj minst en ingrediens!',
-    },
-    en: {
-      tagline: 'Enter what you have at home — we\'ll mix the rest.',
-      labelIngr: 'Your ingredients',
-      placeholder: 'Start typing an ingredient or brand…',
-      hintText: 'No ingredients selected yet.',
-      labelShow: 'Show', btnAlla: 'All', btnAlc: 'Alcoholic', btnNonalc: 'Non-alcoholic',
-      labelMatch: 'Match', btnAny: 'Any', btnAll: 'All',
-      btnGenerate: 'Find drinks', footerText: 'No login required',
-      loading: 'Searching recipes…', translating: 'Loading drinks…',
-      noResults: 'No drinks found',
-      noResultsHint: 'Try fewer ingredients or switch to "Any" matching.',
-      noMatch: 'No matches', noMatchHint: 'Try changing the filter to "All".',
-      youHave: 'You have', of: 'of', ingredients: 'Ingredients', instructions: 'How to make it',
-      glass: 'Glass', alcohol: 'Alcoholic', nonAlcohol: 'Non-alcoholic',
-      noInstructions: 'No instructions available.',
-      error: 'Something went wrong, please try again.', alertIngr: 'Select at least one ingredient!',
-    },
-    ro: {
-      tagline: 'Introdu ce ai acasă — noi facem cocktailul.',
-      labelIngr: 'Ingredientele tale',
-      placeholder: 'Începe să scrii un ingredient sau o marcă…',
-      hintText: 'Niciun ingredient selectat.',
-      labelShow: 'Arată', btnAlla: 'Toate', btnAlc: 'Alcoolice', btnNonalc: 'Fără alcool',
-      labelMatch: 'Potrivire', btnAny: 'Oricare', btnAll: 'Toate',
-      btnGenerate: 'Găsește băuturi', footerText: 'Nu este necesară autentificarea',
-      loading: 'Caut rețete…', translating: 'Traduc rețete…',
-      noResults: 'Nu s-au găsit băuturi',
-      noResultsHint: 'Încearcă mai puține ingrediente sau schimbă la potrivire "Oricare".',
-      noMatch: 'Nicio potrivire', noMatchHint: 'Încearcă să schimbi filtrul la "Toate".',
-      youHave: 'Ai', of: 'din', ingredients: 'Ingrediente', instructions: 'Cum se prepară',
-      glass: 'Pahar', alcohol: 'Alcoolic', nonAlcohol: 'Fără alcool',
-      noInstructions: 'Nu există instrucțiuni disponibile.',
-      error: 'Ceva a mers greșit, încearcă din nou.', alertIngr: 'Selectează cel puțin un ingredient!',
-    }
-  };
-
-  let lang = localStorage.getItem('revben_lang') || 'sv';
-
-  function t(key) { return (i18n[lang] && i18n[lang][key]) || i18n.sv[key] || key; }
-
-  function applyLang() {
-    const set = (id, val) => { const e = document.getElementById(id); if (e) e.textContent = val; };
-    const q = document.querySelector.bind(document);
-    const tagline = q('.tagline'); if (tagline) tagline.textContent = t('tagline');
-    set('label-ingr', t('labelIngr'));
-    const inp = document.getElementById('ingr-input'); if (inp) inp.placeholder = t('placeholder');
-    set('hint-text', t('hintText'));
-    set('label-show', t('labelShow'));
-    set('btn-alla', t('btnAlla'));
-    set('btn-alc', t('btnAlc'));
-    set('btn-nonalc', t('btnNonalc'));
-    set('label-match', t('labelMatch'));
-    set('btn-any', t('btnAny'));
-    set('btn-all', t('btnAll'));
-    set('btn-generate-text', t('btnGenerate'));
-    set('footer-text', t('footerText'));
-  }
-
-  function setLang(l) {
-    lang = l;
-    localStorage.setItem('revben_lang', l);
-    ['sv','en','ro'].forEach(code => {
-      const b = document.getElementById('btn-' + code);
-      if (b) b.classList.toggle('active', code === l);
-    });
-    document.querySelector('html').lang = l;
-    applyLang();
-  }
-
-  // Init on load
-  document.addEventListener('DOMContentLoaded', () => setLang(lang));
-
+  }, 1000);
 </script>
-<!-- Default Statcounter code for Drinkgenerator https://revben.se -->
+
+<!-- Default Statcounter code for GinGenerator https://gingenerator.com -->
 <script type="text/javascript">
-var sc_project=13222589; 
+var sc_project=13222790; 
 var sc_invisible=1; 
-var sc_security="cb8569b6"; 
+var sc_security="6a216fae"; 
 </script>
 <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
-<noscript><div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/13222589/0/cb8569b6/1/" alt="Web Analytics" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<noscript><div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/13222790/0/6a216fae/1/" alt="Web Analytics" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 <!-- End of Statcounter Code -->
 </body>
 </html>
