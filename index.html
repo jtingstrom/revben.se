@@ -682,7 +682,8 @@
       const promises = ingredientList.map(ing =>
         fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${encodeURIComponent(ing)}`)
           .then(r => r.json())
-          .then(d => ({ ing, drinks: d.drinks || [] }))
+          .then(d => ({ ing, drinks: Array.isArray(d.drinks) ? d.drinks : [] }))
+          .catch(() => ({ ing, drinks: [] }))
       );
 
       const results = await Promise.all(promises);
