@@ -436,12 +436,49 @@
     footer a { color: rgba(212,168,75,0.4); text-decoration: none; }
     footer a:hover { color: var(--accent); }
 
+
+    .lang-toggle {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.5rem;
+      z-index: 999;
+      display: flex;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 999px;
+      padding: 2px;
+      gap: 2px;
+    }
+    .lang-toggle button {
+      height: 28px;
+      padding: 0 12px;
+      background: none;
+      border: none;
+      border-radius: 999px;
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+    }
+    .lang-toggle button.active {
+      background: var(--surface2);
+      color: var(--accent);
+      border: 1px solid var(--border2);
+    }
     .scrollbar-thin::-webkit-scrollbar { width: 4px; }
     .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
     .scrollbar-thin::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
   </style>
 </head>
 <body>
+
+<div class="lang-toggle">
+  <button id="btn-sv" class="active" onclick="setLang('sv')">SV</button>
+  <button id="btn-en" onclick="setLang('en')">EN</button>
+  <button id="btn-ro" onclick="setLang('ro')">RO</button>
+</div>
 
 <header>
   <div class="logo">
@@ -451,48 +488,49 @@
     <h1>Drink<em>generator</em></h1>
   </div>
   <p class="tagline">Skriv in vad du har hemma — vi blandar resten.</p>
+  <!-- lang:tagline -->
 </header>
 
 <main>
 
   <div class="input-card">
-    <div class="section-label">Dina ingredienser</div>
+    <div class="section-label" id="label-ingr">Dina ingredienser</div>
     <div class="autocomplete-wrap">
-      <input type="text" id="ingr-input" placeholder="Börja skriva en ingrediens…" autocomplete="off" />
+      <input type="text" id="ingr-input" placeholder="Börja skriva en ingrediens…" id="ingr-input" autocomplete="off" />
       <div class="dropdown scrollbar-thin" id="dropdown"></div>
     </div>
     <div class="tags-area" id="tags">
-      <span class="hint-text">Inga ingredienser valda än.</span>
+      <span class="hint-text" id="hint-text">Inga ingredienser valda än.</span>
     </div>
   </div>
 
   <div class="options-row">
     <div class="opt">
-      <div class="section-label">Visa</div>
+      <div class="section-label" id="label-show">Visa</div>
       <div class="seg" id="type-seg">
-        <button class="active" data-val="alla" onclick="selectSeg(this,'type-seg')">Alla</button>
-        <button data-val="Alcoholic" onclick="selectSeg(this,'type-seg')">Alkohol</button>
-        <button data-val="Non alcoholic" onclick="selectSeg(this,'type-seg')">Alkoholfria</button>
+        <button class="active" data-val="alla" onclick="selectSeg(this,'type-seg')" id="btn-alla">Alla</button>
+        <button data-val="Alcoholic" onclick="selectSeg(this,'type-seg')" id="btn-alc">Alkohol</button>
+        <button data-val="Non alcoholic" onclick="selectSeg(this,'type-seg')" id="btn-nonalc">Alkoholfria</button>
       </div>
     </div>
     <div class="opt">
-      <div class="section-label">Matchning</div>
+      <div class="section-label" id="label-match">Matchning</div>
       <div class="seg" id="match-seg">
-        <button class="active" data-val="any" onclick="selectSeg(this,'match-seg')">Någon</button>
-        <button data-val="all" onclick="selectSeg(this,'match-seg')">Alla</button>
+        <button class="active" data-val="any" onclick="selectSeg(this,'match-seg')" id="btn-any">Någon</button>
+        <button data-val="all" onclick="selectSeg(this,'match-seg')" id="btn-all">Alla</button>
       </div>
     </div>
   </div>
 
   <button class="btn-generate" id="gen-btn" onclick="search()">
-    <span>✦</span> Hitta drinkar
+    <span>✦</span> <span id="btn-generate-text">Hitta drinkar</span>
   </button>
 
   <div id="result"></div>
 </main>
 
 <footer>
-  Recept från <a href="https://www.thecocktaildb.com" target="_blank">TheCocktailDB</a> · Ingen inloggning krävs · Av Jan Tingström
+  Recept från <a href="https://www.thecocktaildb.com" target="_blank">TheCocktailDB</a> · <span id="footer-text">Ingen inloggning krävs</span> · Av Jan Tingström
 </footer>
 
 <script>
@@ -669,12 +707,12 @@
   }
 
   async function search() {
-    if (selected.size === 0) { alert('Välj minst en ingrediens!'); return; }
+    if (selected.size === 0) { alert(t('alertIngr')); return; }
 
     const btn = document.getElementById('gen-btn');
     const result = document.getElementById('result');
     btn.disabled = true;
-    result.innerHTML = `<div class="loading"><div class="shaker">🍸</div><p>Letar i receptbasen…</p></div>`;
+    result.innerHTML = `<div class="loading"><div class="shaker">🍸</div><p>${t('loading')}</p></div>`;
 
     try {
       // Fetch drinks for each ingredient
@@ -737,8 +775,8 @@
         return;
       }
 
-      result.innerHTML = '<div class="loading"><div class="shaker">🌐</div><p>Översätter recept…</p></div>';
-      const translated = await translateDrinks(filtered);
+      result.innerHTML = `<div class="loading"><div class="shaker">🌐</div><p>${t('translating')}</p></div>`;
+      const translated = (lang === 'sv' || lang === 'ro') ? await translateDrinks(filtered) : filtered;
       renderDrinks(translated, ingredientList);
     } catch(e) {
       result.innerHTML = `<div class="error">Något gick fel, försök igen.</div>`;
@@ -751,7 +789,7 @@
   async function translateText(text) {
     if (!text || text.length < 5) return text;
     try {
-      const url = 'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=en|sv';
+      const targetLang = lang === 'ro' ? 'ro' : 'sv'; const url = 'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=en|' + targetLang;
       const res = await fetch(url);
       const data = await res.json();
       if (data.responseStatus === 200 && data.responseData?.translatedText) {
@@ -799,16 +837,16 @@
             <div class="drink-row1">
               <div class="drink-name">${d.strDrink}</div>
               <div class="badges">
-                <span class="badge ${isAlc ? 'badge-alc' : 'badge-non'}">${isAlc ? 'Alkohol' : 'Alkoholfri'}</span>
+                <span class="badge ${isAlc ? 'badge-alc' : 'badge-non'}">${isAlc ? t('alcohol') : t('nonAlcohol')}</span>
                 ${d.strCategory ? `<span class="badge badge-cat">${d.strCategory}</span>` : ''}
               </div>
             </div>
-            ${d.strGlass ? `<div class="drink-glass">Glas: ${d.strGlass}</div>` : ''}
+            ${d.strGlass ? `<div class="drink-glass">${t('glass')}: ${d.strGlass}</div>` : ''}
           </div>
         </div>
         <div class="drink-body">
           <div class="drink-section">
-            <div class="section-label">Ingredienser</div>
+            ${t('ingredients')}
             <ul class="drink-ingr-list">
               ${ingrs.map(i => `
                 <li class="${i.have ? '' : 'missing'}">
@@ -817,12 +855,12 @@
             </ul>
           </div>
           <div class="drink-section">
-            <div class="section-label">Gör så här</div>
-            <p class="drink-recipe-text">${d.strInstructions || 'Inga instruktioner tillgängliga.'}</p>
+            ${t('instructions')}
+            <p class="drink-recipe-text">${d.strInstructions || t('noInstructions')}</p>
           </div>
         </div>
         <div class="match-info">
-          Du har <span>${haveCount} av ${totalCount}</span> ingredienser
+          ${t('youHave')} <span>${haveCount} ${t('of')} ${totalCount}</span>
         </div>
       </div>`;
     }).join('') + '</div>';
