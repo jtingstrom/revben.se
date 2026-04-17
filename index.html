@@ -865,6 +865,97 @@
       </div>`;
     }).join('') + '</div>';
   }
+  // ── i18n ──────────────────────────────────────────────
+  const i18n = {
+    sv: {
+      tagline: 'Skriv in vad du har hemma — vi blandar resten.',
+      labelIngr: 'Dina ingredienser',
+      placeholder: 'Börja skriva en ingrediens eller ett varumärke…',
+      hintText: 'Inga ingredienser valda än.',
+      labelShow: 'Visa', btnAlla: 'Alla', btnAlc: 'Alkohol', btnNonalc: 'Alkoholfria',
+      labelMatch: 'Matchning', btnAny: 'Någon', btnAll: 'Alla',
+      btnGenerate: 'Hitta drinkar', footerText: 'Ingen inloggning krävs',
+      loading: 'Letar i receptbasen…', translating: 'Översätter recept…',
+      noResults: 'Inga drinkar hittades',
+      noResultsHint: 'Prova färre ingredienser eller byt till "Någon" som matchning.',
+      noMatch: 'Inga matchningar', noMatchHint: 'Prova att ändra filtret till "Alla".',
+      youHave: 'Du har', of: 'av', ingredients: 'Ingredienser', instructions: 'Gör så här',
+      glass: 'Glas', alcohol: 'Alkohol', nonAlcohol: 'Alkoholfri',
+      noInstructions: 'Inga instruktioner tillgängliga.',
+      error: 'Något gick fel, försök igen.', alertIngr: 'Välj minst en ingrediens!',
+    },
+    en: {
+      tagline: 'Enter what you have at home — we\'ll mix the rest.',
+      labelIngr: 'Your ingredients',
+      placeholder: 'Start typing an ingredient or brand…',
+      hintText: 'No ingredients selected yet.',
+      labelShow: 'Show', btnAlla: 'All', btnAlc: 'Alcoholic', btnNonalc: 'Non-alcoholic',
+      labelMatch: 'Match', btnAny: 'Any', btnAll: 'All',
+      btnGenerate: 'Find drinks', footerText: 'No login required',
+      loading: 'Searching recipes…', translating: 'Loading drinks…',
+      noResults: 'No drinks found',
+      noResultsHint: 'Try fewer ingredients or switch to "Any" matching.',
+      noMatch: 'No matches', noMatchHint: 'Try changing the filter to "All".',
+      youHave: 'You have', of: 'of', ingredients: 'Ingredients', instructions: 'How to make it',
+      glass: 'Glass', alcohol: 'Alcoholic', nonAlcohol: 'Non-alcoholic',
+      noInstructions: 'No instructions available.',
+      error: 'Something went wrong, please try again.', alertIngr: 'Select at least one ingredient!',
+    },
+    ro: {
+      tagline: 'Introdu ce ai acasă — noi facem cocktailul.',
+      labelIngr: 'Ingredientele tale',
+      placeholder: 'Începe să scrii un ingredient sau o marcă…',
+      hintText: 'Niciun ingredient selectat.',
+      labelShow: 'Arată', btnAlla: 'Toate', btnAlc: 'Alcoolice', btnNonalc: 'Fără alcool',
+      labelMatch: 'Potrivire', btnAny: 'Oricare', btnAll: 'Toate',
+      btnGenerate: 'Găsește băuturi', footerText: 'Nu este necesară autentificarea',
+      loading: 'Caut rețete…', translating: 'Traduc rețete…',
+      noResults: 'Nu s-au găsit băuturi',
+      noResultsHint: 'Încearcă mai puține ingrediente sau schimbă la potrivire "Oricare".',
+      noMatch: 'Nicio potrivire', noMatchHint: 'Încearcă să schimbi filtrul la "Toate".',
+      youHave: 'Ai', of: 'din', ingredients: 'Ingrediente', instructions: 'Cum se prepară',
+      glass: 'Pahar', alcohol: 'Alcoolic', nonAlcohol: 'Fără alcool',
+      noInstructions: 'Nu există instrucțiuni disponibile.',
+      error: 'Ceva a mers greșit, încearcă din nou.', alertIngr: 'Selectează cel puțin un ingredient!',
+    }
+  };
+
+  let lang = localStorage.getItem('revben_lang') || 'sv';
+
+  function t(key) { return (i18n[lang] && i18n[lang][key]) || i18n.sv[key] || key; }
+
+  function applyLang() {
+    const set = (id, val) => { const e = document.getElementById(id); if (e) e.textContent = val; };
+    const q = document.querySelector.bind(document);
+    const tagline = q('.tagline'); if (tagline) tagline.textContent = t('tagline');
+    set('label-ingr', t('labelIngr'));
+    const inp = document.getElementById('ingr-input'); if (inp) inp.placeholder = t('placeholder');
+    set('hint-text', t('hintText'));
+    set('label-show', t('labelShow'));
+    set('btn-alla', t('btnAlla'));
+    set('btn-alc', t('btnAlc'));
+    set('btn-nonalc', t('btnNonalc'));
+    set('label-match', t('labelMatch'));
+    set('btn-any', t('btnAny'));
+    set('btn-all', t('btnAll'));
+    set('btn-generate-text', t('btnGenerate'));
+    set('footer-text', t('footerText'));
+  }
+
+  function setLang(l) {
+    lang = l;
+    localStorage.setItem('revben_lang', l);
+    ['sv','en','ro'].forEach(code => {
+      const b = document.getElementById('btn-' + code);
+      if (b) b.classList.toggle('active', code === l);
+    });
+    document.querySelector('html').lang = l;
+    applyLang();
+  }
+
+  // Init on load
+  document.addEventListener('DOMContentLoaded', () => setLang(lang));
+
 </script>
 <!-- Default Statcounter code for Drinkgenerator https://revben.se -->
 <script type="text/javascript">
