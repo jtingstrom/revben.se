@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt – Drinkgenerator</title>
+  <meta name="description" content="Kontakta oss med frågor eller feedback om Drinkgeneratorn." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://www.revben.se/kontakt.html" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232E1A0E'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia%2C serif' font-size='13' font-weight='600' fill='%23d4a84b'%3ERB%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d0d0d; --surface: #161616; --surface2: #1f1f1f;
+      --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.14);
+      --text: #f0ece4; --muted: #888; --accent: #d4a84b; --accent2: #e8c97a;
+      --radius: 10px; --radius-lg: 16px;
+    }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-weight: 300;
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0;
+    }
+    .lang-toggle {
+      position: fixed; top: 1.2rem; right: 1.5rem; z-index: 999;
+      display: flex; background: var(--surface); border: 1px solid var(--border2);
+      border-radius: 999px; padding: 2px; gap: 2px;
+    }
+    .lang-toggle button {
+      height: 28px; padding: 0 12px; background: none; border: none;
+      border-radius: 999px; color: var(--muted); font-family: 'DM Sans', sans-serif;
+      font-size: 12px; font-weight: 500; cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+    }
+    .lang-toggle button.active {
+      background: var(--surface2); color: var(--accent); border: 1px solid var(--border2);
+    }
+    header {
+      width: 100%; max-width: 800px;
+      padding: 3.5rem 1.5rem 2.5rem; position: relative; z-index: 1;
+    }
+    .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
+    .logo a { text-decoration: none; display: flex; align-items: center; gap: 12px; }
+    .logo svg { color: var(--accent); flex-shrink: 0; }
+    h1 {
+      font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 400; letter-spacing: -0.01em; color: var(--text); line-height: 1.1;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+    .tagline { font-size: 15px; color: var(--muted); margin-top: 0.5rem; font-weight: 300; }
+    main {
+      width: 100%; max-width: 800px;
+      padding: 0 1.5rem 4rem; position: relative; z-index: 1;
+    }
+    .contact-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 2rem;
+    }
+    .section-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem;
+    }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label {
+      display: block; font-size: 13px; color: var(--muted);
+      margin-bottom: 0.4rem; font-weight: 400;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%; background: var(--surface2); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 12px 14px;
+      font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300;
+      color: var(--text); outline: none; transition: border-color 0.15s; resize: vertical;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--muted); }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { min-height: 140px; }
+    .hp { display: none; }
+    .btn-submit {
+      width: 100%; height: 52px; background: var(--surface);
+      border: 1px solid var(--border2); border-radius: var(--radius);
+      color: var(--text); font-family: 'Playfair Display', serif;
+      font-size: 17px; font-weight: 400; font-style: italic;
+      cursor: pointer; transition: border-color 0.15s, background 0.15s;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .btn-submit:hover { border-color: var(--accent); background: rgba(212,168,75,0.05); }
+    .success-msg {
+      display: none; text-align: center; padding: 2rem;
+      color: var(--accent); font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-style: italic;
+    }
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; color: var(--muted); text-decoration: none;
+      margin-bottom: 1.5rem; transition: color 0.15s;
+    }
+    .back-link:hover { color: var(--accent); }
+    footer {
+      width: 100%; max-width: 800px; padding: 0 1.5rem 2rem;
+      text-align: center; font-size: 12px; color: rgba(255,255,255,0.2);
+      position: relative; z-index: 1;
+    }
+    footer a { color: rgba(212,168,75,0.4); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<div class="lang-toggle">
+  <button id="btn-sv" onclick="setLang('sv')">SV</button>
+  <button id="btn-en" onclick="setLang('en')">EN</button>
+  <button id="btn-ro" onclick="setLang('ro')">RO</button>
+</div>
+
+<header>
+  <div class="logo">
+    <a href="/">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path d="M4 3h16l-6 9.5V20h2.5v1.5h-9V20H10v-7.5L4 3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+      </svg>
+      <h1>Drink<em>generator</em></h1>
+    </a>
+  </div>
+  <p class="tagline" id="tagline">Vi hör gärna från dig.</p>
+</header>
+
+<main>
+  <a href="/" class="back-link" id="back-link">← Tillbaka till generatorn</a>
+
+  <div class="contact-card">
+    <div class="section-label" id="label-contact">Kontakta oss</div>
+
+    <form id="contact-form" action="https://formspree.io/f/mkokjdlw" method="POST">
+      <div class="hp">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+      </div>
+      <div class="form-group">
+        <label for="name" id="label-name">Namn</label>
+        <input type="text" id="name" name="name" placeholder="Ditt namn" required />
+      </div>
+      <div class="form-group">
+        <label for="email" id="label-email">E-post</label>
+        <input type="email" id="email" name="email" placeholder="din@epost.se" required />
+      </div>
+      <div class="form-group">
+        <label for="message" id="label-message">Meddelande</label>
+        <textarea id="message" name="message" placeholder="Skriv ditt meddelande här…" required></textarea>
+      </div>
+      <button type="submit" class="btn-submit"><span>✦</span> <span id="btn-send">Skicka meddelande</span></button>
+    </form>
+
+    <div class="success-msg" id="success-msg">
+      <span id="success-text">Tack för ditt meddelande! Vi återkommer så snart vi kan.</span>
+    </div>
+  </div>
+</main>
+
+<footer>
+  Recept från <a href="https://www.thecocktaildb.com" target="_blank">TheCocktailDB</a> · <a href="/kontakt.html" id="footer-contact">Kontakt</a> · Av Jan Tingström · <span style="color:var(--muted);font-size:11px;">v1.01</span>
+</footer>
+
+<script>
+  const i18n = {
+    sv: {
+      tagline: 'Vi hör gärna från dig.',
+      backLink: '← Tillbaka till generatorn',
+      labelContact: 'Kontakta oss',
+      labelName: 'Namn', placeholderName: 'Ditt namn',
+      labelEmail: 'E-post', placeholderEmail: 'din@epost.se',
+      labelMessage: 'Meddelande', placeholderMessage: 'Skriv ditt meddelande här…',
+      btnSend: 'Skicka meddelande',
+      success: 'Tack för ditt meddelande! Vi återkommer så snart vi kan.',
+      footerContact: 'Kontakt',
+    },
+    en: {
+      tagline: "We'd love to hear from you.",
+      backLink: '← Back to the generator',
+      labelContact: 'Contact us',
+      labelName: 'Name', placeholderName: 'Your name',
+      labelEmail: 'Email', placeholderEmail: 'your@email.com',
+      labelMessage: 'Message', placeholderMessage: 'Write your message here…',
+      btnSend: 'Send message',
+      success: "Thank you for your message! We'll get back to you as soon as possible.",
+      footerContact: 'Contact',
+    },
+    ro: {
+      tagline: 'Ne bucurăm să auzim de la tine.',
+      backLink: '← Înapoi la generator',
+      labelContact: 'Contactează-ne',
+      labelName: 'Nume', placeholderName: 'Numele tău',
+      labelEmail: 'E-mail', placeholderEmail: 'email@tau.ro',
+      labelMessage: 'Mesaj', placeholderMessage: 'Scrie mesajul tău aici…',
+      btnSend: 'Trimite mesajul',
+      success: 'Mulțumim pentru mesaj! Îți vom răspunde cât mai curând.',
+      footerContact: 'Contact',
+    }
+  };
+
+  let lang = localStorage.getItem('revben_lang') || 'sv';
+
+  function t(key) { return (i18n[lang] && i18n[lang][key]) || i18n.sv[key] || key; }
+
+  function applyLang() {
+    const set = (id, val) => { const e = document.getElementById(id); if (e) e.textContent = val; };
+    const setph = (id, val) => { const e = document.getElementById(id); if (e) e.placeholder = val; };
+    document.querySelector('html').lang = lang;
+    set('tagline', t('tagline'));
+    set('back-link', t('backLink'));
+    set('label-contact', t('labelContact'));
+    set('label-name', t('labelName')); setph('name', t('placeholderName'));
+    set('label-email', t('labelEmail')); setph('email', t('placeholderEmail'));
+    set('label-message', t('labelMessage')); setph('message', t('placeholderMessage'));
+    set('btn-send', t('btnSend'));
+    set('success-text', t('success'));
+    set('footer-contact', t('footerContact'));
+  }
+
+  function setLang(l) {
+    lang = l;
+    localStorage.setItem('revben_lang', l);
+    ['sv','en','ro'].forEach(code => {
+      const b = document.getElementById('btn-' + code);
+      if (b) b.classList.toggle('active', code === l);
+    });
+    applyLang();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => setLang(lang));
+
+  const form = document.getElementById('contact-form');
+  const success = document.getElementById('success-msg');
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const res = await fetch(form.action, {
+      method: 'POST', body: data, headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      form.style.display = 'none';
+      success.style.display = 'block';
+    }
+  });
+</script>
+</body>
+</html>
