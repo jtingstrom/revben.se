@@ -29,15 +29,27 @@
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
       pointer-events: none; z-index: 0;
     }
+    .lang-toggle {
+      position: fixed; top: 1.2rem; right: 1.5rem; z-index: 999;
+      display: flex; background: var(--surface); border: 1px solid var(--border2);
+      border-radius: 999px; padding: 2px; gap: 2px;
+    }
+    .lang-toggle button {
+      height: 28px; padding: 0 12px; background: none; border: none;
+      border-radius: 999px; color: var(--muted); font-family: 'DM Sans', sans-serif;
+      font-size: 12px; font-weight: 500; cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+    }
+    .lang-toggle button.active {
+      background: var(--surface2, #1f1f1f); color: var(--accent); border: 1px solid var(--border2);
+    }
     .card {
       position: relative; z-index: 1;
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--radius-lg); padding: 3rem 2.5rem;
       max-width: 520px; width: 100%; text-align: center;
     }
-    .glass-icon {
-      color: var(--accent); margin-bottom: 1.5rem;
-    }
+    .glass-icon { color: var(--accent); margin-bottom: 1.5rem; }
     .old-name {
       font-size: 13px; color: var(--muted); letter-spacing: 0.05em;
       text-transform: uppercase; margin-bottom: 1rem;
@@ -46,18 +58,11 @@
     h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(1.6rem, 4vw, 2.2rem);
-      font-weight: 400; line-height: 1.2;
-      color: var(--text); margin-bottom: 0.5rem;
+      font-weight: 400; line-height: 1.2; color: var(--text); margin-bottom: 0.5rem;
     }
     h1 em { font-style: italic; color: var(--accent); }
-    .divider {
-      width: 60px; height: 1px; background: var(--accent);
-      opacity: 0.3; margin: 1.5rem auto;
-    }
-    p {
-      font-size: 15px; color: var(--muted); line-height: 1.7;
-      margin-bottom: 2rem;
-    }
+    .divider { width: 60px; height: 1px; background: var(--accent); opacity: 0.3; margin: 1.5rem auto; }
+    p { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
       gap: 10px; width: 100%; height: 52px;
@@ -68,13 +73,17 @@
       cursor: pointer; transition: border-color 0.15s, background 0.15s;
     }
     .btn:hover { border-color: var(--accent); background: rgba(212,168,75,0.05); }
-    .countdown {
-      margin-top: 1.25rem; font-size: 12px; color: var(--muted);
-    }
+    .countdown { margin-top: 1.25rem; font-size: 12px; color: var(--muted); }
     .countdown span { color: var(--accent); }
   </style>
 </head>
 <body>
+
+<div class="lang-toggle">
+  <button id="btn-sv" onclick="setLang('sv')">SV</button>
+  <button id="btn-en" onclick="setLang('en')">EN</button>
+  <button id="btn-ro" onclick="setLang('ro')">RO</button>
+</div>
 
 <div class="card">
   <div class="glass-icon">
@@ -82,28 +91,80 @@
       <path d="M4 3h16l-6 9.5V20h2.5v1.5h-9V20H10v-7.5L4 3z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
     </svg>
   </div>
-
-  <div class="old-name">Drinkgenerator</div>
-
-  <h1>Vi har bytt namn till<br>The Gin <em>Generator</em></h1>
-
+  <div class="old-name" id="old-name">Drinkgenerator</div>
+  <h1 id="heading">Vi har bytt namn till<br>The Gin <em>Generator</em></h1>
   <div class="divider"></div>
-
-  <p>Samma recept, samma enkla sökning — nu under ett nytt namn och en ny adress. Du hittar oss på gingenerator.com.</p>
-
-  <a href="https://www.gingenerator.com" class="btn">
-    <span>✦</span> Gå till The Gin Generator
+  <p id="body-text">Samma recept, samma enkla sökning — nu under ett nytt namn och en ny adress. Du hittar oss på gingenerator.com.</p>
+  <a href="https://www.gingenerator.com" class="btn" id="btn-go">
+    <span>✦</span> <span id="btn-label">Gå till The Gin Generator</span>
   </a>
-
-  <p class="countdown">Du skickas vidare automatiskt om <span id="sec">10</span> sekunder.</p>
+  <p class="countdown" id="countdown-text">Du skickas vidare automatiskt om <span id="sec">10</span> sekunder.</p>
 </div>
 
 <script>
+  const i18n = {
+    sv: {
+      oldName: 'Drinkgenerator',
+      heading: 'Vi har bytt namn till',
+      body: 'Samma recept, samma enkla sökning — nu under ett nytt namn och en ny adress. Du hittar oss på gingenerator.com.',
+      btn: 'Gå till The Gin Generator',
+      countdown: 'Du skickas vidare automatiskt om',
+      seconds: 'sekunder.',
+    },
+    en: {
+      oldName: 'Drinkgenerator',
+      heading: 'We have a new name:',
+      body: 'Same recipes, same simple search — now under a new name and address. Find us at gingenerator.com.',
+      btn: 'Go to The Gin Generator',
+      countdown: 'You will be redirected automatically in',
+      seconds: 'seconds.',
+    },
+    ro: {
+      oldName: 'Drinkgenerator',
+      heading: 'Ne-am redenumit în',
+      body: 'Aceleași rețete, același motor de căutare simplu — acum cu un nou nume și o nouă adresă. Ne găsești pe gingenerator.com.',
+      btn: 'Mergi la The Gin Generator',
+      countdown: 'Vei fi redirecționat automat în',
+      seconds: 'secunde.',
+    }
+  };
+
+  let lang = localStorage.getItem('revben_lang') || 'sv';
+
+  function applyLang() {
+    const d = i18n[lang];
+    document.querySelector('html').lang = lang;
+    document.getElementById('old-name').textContent = d.oldName;
+    document.getElementById('heading').innerHTML = d.heading + '<br>The Gin <em>Generator</em>';
+    document.getElementById('body-text').textContent = d.body;
+    document.getElementById('btn-label').textContent = d.btn;
+    updateCountdownText();
+  }
+
+  function updateCountdownText() {
+    const d = i18n[lang];
+    const sec = document.getElementById('sec').textContent;
+    document.getElementById('countdown-text').innerHTML =
+      d.countdown + ' <span id="sec">' + sec + '</span> ' + d.seconds;
+  }
+
+  function setLang(l) {
+    lang = l;
+    localStorage.setItem('revben_lang', l);
+    ['sv','en','ro'].forEach(code => {
+      const b = document.getElementById('btn-' + code);
+      if (b) b.classList.toggle('active', code === l);
+    });
+    applyLang();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => setLang(lang));
+
   let s = 10;
-  const el = document.getElementById('sec');
   const timer = setInterval(() => {
     s--;
-    el.textContent = s;
+    const el = document.getElementById('sec');
+    if (el) el.textContent = s;
     if (s <= 0) {
       clearInterval(timer);
       window.location.href = 'https://www.gingenerator.com';
@@ -120,5 +181,6 @@ var sc_security="6a216fae";
 <script type="text/javascript" src="https://www.statcounter.com/counter/counter.js" async></script>
 <noscript><div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img class="statcounter" src="https://c.statcounter.com/13222790/0/6a216fae/1/" alt="Web Analytics" referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
 <!-- End of Statcounter Code -->
+
 </body>
 </html>
